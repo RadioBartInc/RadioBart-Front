@@ -1,0 +1,12 @@
+#reviews-recientes {
+  display: flex;
+  flex-direction: column;
+  margin: 3rem;
+}
+
+#reviews-recientes h2{
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid var(--light-elem-bg);
+    box-shadow: 0 3px 2px -3px var(--light-elem-bg);
+}
