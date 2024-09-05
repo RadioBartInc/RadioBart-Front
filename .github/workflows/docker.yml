@@ -29,7 +29,7 @@ jobs:
 
       - name: Build the Docker image
         run: |
-          docker build -t ghcr.io/RadioBartInc/RadioBart-Front/my-app:latest ./front
+          docker build -t ghcr.io/radiobartinc/radiobart-front/my-app:latest ./front
       - name: Push the Docker image
         run: |
-          docker push ghcr.io/RadioBartInc/RadioBart-Front/my-app:latest
+          docker push ghcr.io/radiobartinc/radiobart-front/my-app:latest
