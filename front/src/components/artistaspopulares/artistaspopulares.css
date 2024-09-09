@@ -1,0 +1,59 @@
+section{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.artista_nombre{
+    font-size: 1.2rem;
+    margin: .3rem 0;
+}
+
+.artista_foto{
+    border-radius: 100vw;
+}
+
+.artista{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.puesto{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+    margin: .5rem 0;
+    border-radius: 100vw;
+    aspect-ratio: 1/1;
+    color: var(--page-bg);
+}
+
+.primero{
+    width: var(--primero-size);
+    height: var(--primero-size);
+    background-color: var(--primero-color);
+    box-shadow: 0 0 4px 2px var(--primero-color);
+}
+
+.segundo{
+    width: var(--segundo-size);
+    height: var(--segundo-size);
+    background-color: var(--segundo-color);
+    box-shadow: 0 0 4px 2px var(--segundo-color);
+}
+
+.tercero{
+    width: var(--tercero-size);
+    height: var(--tercero-size);
+    background-color: var(--tercero-color);
+    box-shadow: 0 0 4px 2px var(--tercero-color);
+}
+
+.cuarto{
+    width: var(--cuarto-size);
+    height: var(--cuarto-size);
+    background-color: var(--cuarto-color);
+    box-shadow: 0 0 4px 2px var(--cuarto-color);
+}
