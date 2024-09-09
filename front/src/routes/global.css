@@ -4,13 +4,32 @@
     --elem-bg: #5a5a5a;
     --light-elem-bg: #7a7a7a;
     --hover-buttong-bg: #6a6a6a;
+
     --page-bg: #3b3b3b;
+
     --font-color: #fff;
     --shadow-color: rgba(0, 0, 0, 0.3);
+
     --bad-rating-bg: #ff5353;
     --good-rating-bg: #98ff98;
     --regular-rating-bg: #ffff79;
+
     --fecha-color: rgb(134, 134, 134);
+
+    --primero-color: rgb(229, 228, 226);
+    --segundo-color: rgb(255,215,0);
+    --tercero-color: rgb(192,192,192);
+    --cuarto-color:  rgb(205, 127, 50);
+    --primero-size: 3rem;
+    --segundo-size: 2.75rem;
+    --tercero-size: 2.5rem;
+    --cuarto-size: 2.25rem;
+
+    --a-glow: rgba(255, 255, 255, 0.4);
+
+    --form-review-bg: rgb(114, 114, 114);
+    --form-review-field-bg: rgb(70, 70, 70);
+    --form-submit-bg: rgb(97, 97, 97);
 }
 
 :global(*) {
@@ -22,10 +41,35 @@
 :global(body){
     margin: 0;
     padding: 0;
-    font-family: 'Roboto', sans-serif;
     background-color: var(--page-bg);
     color: var(--font-color);
     font-family: "Fira Sans", sans-serif;
     font-weight: 400;
     font-style: normal;
+}
+
+:global(a){
+    text-decoration: none;
+    cursor: pointer;
+    color: inherit;
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    transition: .25s;
+}
+
+:global(a:hover){
+    text-shadow: 0 0 8px var(--a-glow);
+}
+
+:global(.good_rating){
+    background-color: var(--good-rating-bg);
+}
+
+:global(.bad_rating){
+    background-color: var(--bad-rating-bg);
+}
+
+:global(.regular_rating){
+    background-color: var(--regular-rating-bg);
 }

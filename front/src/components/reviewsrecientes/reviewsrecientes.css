@@ -1,7 +1,6 @@
 section{
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-gap: 1rem;
+    grid-template-columns: repeat(2, 1fr);
 }
 .review{
     display: grid;
@@ -57,18 +56,6 @@ section{
     border-radius: 5px;
     padding: .3rem 0;
     margin: .3rem 0;
-}
-
-.good_rating{
-    background-color: var(--good-rating-bg);
-}
-
-.bad_rating{
-    background-color: var(--bad-rating-bg);
-}
-
-.regular_rating{
-    background-color: var(--regular-rating-bg);
 }
 
 .usuario{

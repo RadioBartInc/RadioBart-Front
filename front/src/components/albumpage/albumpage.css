@@ -1,0 +1,119 @@
+section{
+    display: grid;
+    grid-template-columns: 25% 75%;
+    grid-template-areas:"data data"
+                        "portada form"
+                        "rating form"
+}
+
+.rating{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    grid-area: rating;
+    color: var(--page-bg);
+    height: 2rem;
+    font-size: 1.5rem;
+    border-radius: 100vw;
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+    grid-area: form;
+    justify-content: space-between;
+    margin-left: .5rem;
+    background-color: var(--form-review-bg);
+    border-radius: .5rem;
+    padding: .5rem;
+}
+
+.portada{
+    grid-area: portada;
+    aspect-ratio: 1/1;
+    width: 100%;
+    margin-bottom: .5rem;
+}
+
+.datos{
+    grid-area: data;
+}
+
+.nombre_album{
+    margin-bottom: .5rem;
+}
+
+.user_rating{
+    display: flex;
+}
+
+.rating_input {
+    -moz-appearance: textfield; 
+    -webkit-appearance: none;  
+    appearance: none;         
+    background-color: var(--form-review-field-bg); 
+    border: none;        
+    outline: none;  
+    color: var(--font-color);
+    font-size: 1rem;
+    width: 3.5rem;
+    margin-right: .5rem;
+    text-align: center;
+    border-radius: .25rem;
+
+}
+
+.rating_input::-webkit-inner-spin-button,
+.rating_input::-webkit-outer-spin-button {
+    -webkit-appearance: none;  
+    margin: 0;
+}
+
+.review_input {
+    border-radius: .25rem;
+    -moz-appearance: textfield; 
+    -webkit-appearance: none;  
+    appearance: none;         
+    background-color: var(--form-review-field-bg); 
+    border: none;        
+    outline: none;  
+    color: var(--font-color);
+    font-size: 1rem;
+    margin: 0.5rem 0;
+    padding: 0.1rem;
+    height: 100%;
+}
+
+.review_input::-webkit-inner-spin-button,
+.review_input::-webkit-outer-spin-button {
+    -webkit-appearance: none;  
+    margin: 0;
+}
+
+.submit{
+    -moz-appearance: textfield; 
+    -webkit-appearance: none;  
+    appearance: none;          
+    border: none;        
+    outline: none;  
+    color: var(--font-color);
+    font-size: 1rem;
+    width: 50%;
+    margin: 0 auto;
+    background-color: var(--form-submit-bg);
+    color: var(--font-color);
+    cursor: pointer;
+    transition: ease 0.3s;
+    border-radius: 100vw;
+}
+
+.submit::-webkit-inner-spin-button,
+.submit::-webkit-outer-spin-button {
+    -webkit-appearance: none;  
+    margin: 0;
+}
+
+.submit:hover{
+    box-shadow: 0 0 4px var(--form-review-field-bg);
+    background-color: var(--form-review-field-bg);
+}

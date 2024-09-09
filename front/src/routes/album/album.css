@@ -1,7 +1,5 @@
-.section-body {
-  display: flex;
-  flex-direction: column;
-  margin: 3rem;
+.section-body{
+    margin: 1.5rem;
 }
 
 .section-title{
