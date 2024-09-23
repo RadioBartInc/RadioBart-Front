@@ -118,3 +118,9 @@ form{
     box-shadow: 0 0 4px var(--form-review-field-bg);
     background-color: var(--form-review-field-bg);
 }
+
+.rating-wrapper{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
