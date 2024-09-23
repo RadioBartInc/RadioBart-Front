@@ -7,7 +7,8 @@ section{
     grid-template-columns: 1fr 3fr;
     grid-template-areas: "portada contenido"
                          "rating usuario"
-                         "fecha usuario";
+                         "fecha void";
+    padding-right: 10vw;
 }
 
 .portada{
@@ -41,6 +42,7 @@ section{
     margin: .3rem 0;
 
 }
+
 .fecha{
     grid-area: fecha;
     color: var(--fecha-color);
@@ -49,20 +51,27 @@ section{
     margin: .3rem 0;
 }
 
+.rating-wrapper{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
 .rating{
     grid-area: rating;
     text-align: center;
     color: var(--page-bg);
-    border-radius: 5px;
+    border-radius: 100vw;
     padding: .3rem 0;
     margin: .3rem 0;
+    width: 4rem;
 }
 
 .usuario{
     grid-area: usuario;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: right;
 }
 
 .avatar{

@@ -1,0 +1,24 @@
+.info_usuario{
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+}
+
+.avatar{
+    aspect-ratio: 1/1;
+    width: 100%;
+    height: 100%;
+    max-width: 3rem;
+    max-height: 3rem;
+    border-radius: 100vw;
+    margin-right: 1rem;
+} 
+
+.texto{
+    margin-top: .5rem;
+    margin-left: .5rem;
+}
+
+.comentario{
+    margin-bottom: 1rem;
+}

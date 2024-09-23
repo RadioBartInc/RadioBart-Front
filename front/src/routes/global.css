@@ -73,3 +73,26 @@
 :global(.regular_rating){
     background-color: var(--regular-rating-bg);
 }
+
+:global(.hover-image) {
+    transition: transform 0.3s ease, z-index 0s; 
+    z-index: 1; 
+}
+
+:global(.hover-image:hover) {
+    transform: scale(1.075) translateZ(0); 
+    z-index: 2; 
+}
+
+:global(.section-body) {
+    display: flex;
+    flex-direction: column;
+    margin: 3rem;
+}
+
+:global(.section-title){
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid var(--light-elem-bg);
+    box-shadow: 0 3px 2px -3px var(--light-elem-bg);
+}

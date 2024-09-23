@@ -22,7 +22,7 @@
         <ArtistasPopulares/>
     </section>
     <section class="section-body" id="reviews-recientes">
-        <h2 class="section_title">Reviews recientes</h2>
+        <h2 class="section-title">Reviews recientes</h2>
         <ReviewsRecientes/>
     </section>
 </main>
