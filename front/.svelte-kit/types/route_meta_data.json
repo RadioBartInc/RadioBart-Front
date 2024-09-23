@@ -1,4 +1,11 @@
 {
 	"/": [],
-	"/album": []
+	"/albums": [],
+	"/album": [],
+	"/artistas": [],
+	"/artista": [],
+	"/login": [],
+	"/register": [],
+	"/review": [],
+	"/usuario": []
 }

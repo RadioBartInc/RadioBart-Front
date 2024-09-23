@@ -1,0 +1,33 @@
+section{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.artista{
+    font-size: 1.2rem;
+    margin-top: .3rem;
+}
+
+.nombre_album{
+    font-size: 1.0rem;
+    margin-bottom: .3rem 0;
+}
+
+.rating{
+    grid-area: rating;
+    text-align: center;
+    color: var(--page-bg);
+    border-radius: 100vw;
+    padding: .3rem 0;
+    margin: .3rem 0;
+    width: 4rem;
+}
+
+.album{
+    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0 2rem;
+}

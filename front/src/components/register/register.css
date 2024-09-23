@@ -1,0 +1,57 @@
+form{
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    border-radius: 1rem;
+    background-color: rgb(75, 75, 75);
+}
+
+.text-input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: none;
+    border-bottom: 2px solid #ccc;
+    background: transparent;
+    outline: none;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Focus effect: glowing bottom line */
+.text-input:focus {
+    border-bottom-color: white; /* Adjust this for your glow color */
+}
+
+/* Label styles for a cleaner look */
+label {
+    font-weight: bold;
+    margin-top: 10px;
+    display: block;
+}
+
+h2{
+    margin-bottom: 1rem;
+}
+
+.wrapper{
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+}
+.submit {
+    width: 50%;
+    padding: .3rem .5rem;
+    background-color: var(--elem-bg); /* Default button color */
+    color: white;
+    border: none;
+    border-radius: 100vw; /* Rounded corners */
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Hover effect: darken and glow */
+.submit:hover {
+    background-color: rgb(68, 68, 68); /* Darker color on hover */
+    box-shadow: 0 0 .25rem .05rem rgb(92, 92, 92); /* Soft glowing effect */
+}
+
