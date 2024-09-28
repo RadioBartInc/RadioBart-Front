@@ -1,7 +1,9 @@
 {
 	"/": [],
 	"/albums": [],
-	"/album": [],
+	"/album/[id]": [
+		"src/routes/album/[id]/+page.ts"
+	],
 	"/artistas": [],
 	"/artista": [],
 	"/login": [],

@@ -19,7 +19,7 @@ export const server_loads = [];
 export const dictionary = {
 		"/": [2],
 		"/albums": [4],
-		"/album": [3],
+		"/album/[id]": [3],
 		"/artistas": [6],
 		"/artista": [5],
 		"/login": [7],
