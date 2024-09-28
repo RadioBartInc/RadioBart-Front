@@ -1,0 +1,14 @@
+[
+    {
+      "artist": "Artist Name 1",
+      "album_name": "Album Name 1",
+      "cover": "https://via.placeholder.com/150",
+      "rating": 96
+    },
+    {
+      "artist": "Artist Name 2",
+      "album_name": "Album Name 2",
+      "cover": "https://via.placeholder.com/150",
+      "rating": 16
+    }
+]
