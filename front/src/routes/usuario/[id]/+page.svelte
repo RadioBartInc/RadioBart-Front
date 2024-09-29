@@ -2,10 +2,12 @@
     import Navbar from '@src/components/navbar/Navbar.svelte';
 	import Usuario from '@src/components/usuario/Usuario.svelte';
     import UsuarioReviews from '@src/components/usuarioreviews/UsuarioReviews.svelte'
+
+    // TODO: Make this work dynamically
 </script>
 
 <style>
-    @import './../global.css';
+    @import '@src/routes/global.css';
     @import './usuario.css';
 </style>
 

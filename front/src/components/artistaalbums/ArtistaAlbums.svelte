@@ -1,64 +1,20 @@
+<script lang="ts">
+    import type { Album } from '@src/models/AlbumClass'; // Import Album model
+    import { getRatingClass } from '@src/utils/misc'; // Import utility function for rating classes
+  
+    export let albums: Album[] = []; // Array of albums passed as a prop
+    export let avgRatings: Record<string, number> = {}; // Object to hold average ratings for each album
+
+</script>
+
 <section>
-    <div class="album">
-        <img src="https://via.placeholder.com/150" alt="album_cover" class="portada hover-image">
-        <h3 class="nombre_album"><a href="./">Nombre del album</a></h3>
-        <p class="rating good_rating">96</p>
-    </div>
-    <div class="album">
-        <img src="https://via.placeholder.com/150" alt="album_cover" class="portada hover-image">
-        <h3 class="nombre_album"><a href="./">Nombre del album</a></h3>
-        <p class="rating bad_rating">16</p>
-    </div>
-    <div class="album">
-        <img src="https://via.placeholder.com/150" alt="album_cover" class="portada hover-image">
-        <h3 class="nombre_album"><a href="./">Nombre del album</a></h3>
-        <p class="rating regular_rating">56</p>
-    </div>
-    <div class="album">
-        <img src="https://via.placeholder.com/150" alt="album_cover" class="portada hover-image">
-        <h3 class="nombre_album"><a href="./">Nombre del album</a></h3>
-        <p class="rating good_rating">96</p>
-    </div>
-    <div class="album">
-        <img src="https://via.placeholder.com/150" alt="album_cover" class="portada hover-image">
-        <h3 class="nombre_album"><a href="./">Nombre del album</a></h3>
-        <p class="rating bad_rating">0</p>
-    </div>
-    <div class="album">
-        <img src="https://via.placeholder.com/150" alt="album_cover" class="portada hover-image">
-        <h3 class="nombre_album"><a href="./">Nombre del album</a></h3>
-        <p class="rating bad_rating">16</p>
-    </div>
-    <div class="album">
-        <img src="https://via.placeholder.com/150" alt="album_cover" class="portada hover-image">
-        <h3 class="nombre_album"><a href="./">Nombre del album</a></h3>
-        <p class="rating bad_rating">0</p>
-    </div>
-    <div class="album">
-        <img src="https://via.placeholder.com/150" alt="album_cover" class="portada hover-image">
-        <h3 class="nombre_album"><a href="./">Nombre del album</a></h3>
-        <p class="rating regular_rating">56</p>
-    </div>
-    <div class="album">
-        <img src="https://via.placeholder.com/150" alt="album_cover" class="portada hover-image">
-        <h3 class="nombre_album"><a href="./">Nombre del album</a></h3>
-        <p class="rating good_rating">96</p>
-    </div>
-    <div class="album">
-        <img src="https://via.placeholder.com/150" alt="album_cover" class="portada hover-image">
-        <h3 class="nombre_album"><a href="./">Nombre del album</a></h3>
-        <p class="rating bad_rating">16</p>
-    </div>
-    <div class="album">
-        <img src="https://via.placeholder.com/150" alt="album_cover" class="portada hover-image">
-        <h3 class="nombre_album"><a href="./">Nombre del album</a></h3>
-        <p class="rating regular_rating">56</p>
-    </div>
-    <div class="album">
-        <img src="https://via.placeholder.com/150" alt="album_cover" class="portada hover-image">
-        <h3 class="nombre_album"><a href="./">Nombre del album</a></h3>
-        <p class="rating bad_rating">0</p>
-    </div>
+    {#each albums as album}
+        <div class="album">
+            <img src={album.cover || 'https://via.placeholder.com/150'} alt="album_cover" class="portada hover-image">
+            <h3 class="nombre_album"><a href={`/album/${album.id}`}>{album.title}</a></h3>
+            <p class="rating {getRatingClass(avgRatings[album.id] || 0)}">{avgRatings[album.id] || 0}</p>
+        </div>
+    {/each}
 </section>
 
 <style>

@@ -1,3 +1,4 @@
+<!-- TODO:Create the register system -->
 <form action="/register" method="POST">
     <h2>Register</h2>
   

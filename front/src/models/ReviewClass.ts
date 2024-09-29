@@ -5,7 +5,9 @@ export class Review {
       public ratingScore: number,
       public content: string,
       public fecha: Date,
-      public likes: number
+      public likes: number,
+      public albumId: string,
+      public comentarios: string[]
     ) {}
   }
   

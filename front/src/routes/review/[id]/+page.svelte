@@ -2,10 +2,12 @@
     import Navbar from '@src/components/navbar/Navbar.svelte';
 	import Review from '@src/components/review/Review.svelte';
 	import ReviewComentarios from '@src/components/reviewcomentarios/ReviewComentarios.svelte';
+
+    // TODO: Make this work dynamically
 </script>
 
 <style>
-    @import './../global.css';
+    @import '@src/routes/global.css';
     @import './review.css';
 </style>
 

@@ -1,7 +1,5 @@
 <script>
 	import Register from "@src/components/register/Register.svelte";
-
-
 </script>
 
 <style>

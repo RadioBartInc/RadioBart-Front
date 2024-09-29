@@ -25,6 +25,8 @@
       }
     }
   });
+
+  // TODO: Make it so you can submit a review
 </script>
 
 <section>

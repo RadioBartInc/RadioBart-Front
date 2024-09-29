@@ -1,3 +1,5 @@
+<!-- TODO: Create the login system and make it so it creates an active session-->
+<!-- TODO: Make it so we get the token for jwt auth-->
 <form action="/login" method="POST">
     <h2>Login</h2>
   

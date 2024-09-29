@@ -1,7 +1,12 @@
 // APIClient.ts
+
 import axios from "axios";
 import { BACKEND_CONFIG } from "@src/config";
 import type { Review } from "@src/models/ReviewClass";
+
+//TODO: Add JWT auth system to get the token
+//TODO: Add JWT auth system to send the token with every request
+//TODO: Add needed functions for comment class
 
 const BASE_URL = `http://${BACKEND_CONFIG.IP}:${BACKEND_CONFIG.PORT}`;
 
@@ -88,6 +93,16 @@ export async function fetchUserById(id: string): Promise<any> {
 export async function fetchAlbumAvgRating(id: string): Promise<any> {
   try {
     const response = await axios.get(`${BASE_URL}/albums/avgRating/${id}`);
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching average rating:', error);
+    throw error;
+  }
+}
+
+export async function fetchArtistaAvgRating(id: string): Promise<any> {
+  try {
+    const response = await axios.get(`${BASE_URL}/artistas/avgRating/${id}`);
     return response.data;
   } catch (error) {
     console.error('Error fetching average rating:', error);

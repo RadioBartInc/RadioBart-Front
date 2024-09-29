@@ -1,3 +1,4 @@
+<!-- TODO: Fetch comments from a review, not sure if this will be a thing -->
 <section>
     <div class="comentario">
         <div class="usuario">

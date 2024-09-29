@@ -1,3 +1,4 @@
+<!-- TODO: Make it so it gets the data and sorts it, also make it so that it doesnt let the content go over about 75-100 chars and add a "..." if it exceeds the limit -->
 <section>
     <div class="review">
         <img src="https://via.placeholder.com/150" alt="Avatar" class="portada hover-image">

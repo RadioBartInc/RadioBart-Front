@@ -21,11 +21,11 @@ export const dictionary = {
 		"/albums": [4],
 		"/album/[id]": [3],
 		"/artistas": [6],
-		"/artista": [5],
+		"/artista/[id]": [5],
 		"/login": [7],
 		"/register": [8],
-		"/review": [9],
-		"/usuario": [10]
+		"/review/[id]": [9],
+		"/usuario/[id]": [10]
 	};
 
 export const hooks = {

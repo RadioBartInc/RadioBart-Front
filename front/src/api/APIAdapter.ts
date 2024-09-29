@@ -1,5 +1,5 @@
 // AlbumAdapter.ts
-import { fetchAllArtists, fetchAllReviews, fetchAllAlbums, fetchArtistById, fetchAlbumById, fetchReviewById, fetchAlbumAvgRating, fetchAllUsers, fetchUserById } from "./APIClient";
+import { fetchAllArtists, fetchAllReviews, fetchAllAlbums, fetchArtistById, fetchAlbumById, fetchReviewById, fetchAlbumAvgRating, fetchAllUsers, fetchUserById, fetchArtistaAvgRating } from "./APIClient";
 import { Album } from "@src/models/AlbumClass";
 import { Artista } from "@src/models/ArtistaClass";
 import { Review } from "@src/models/ReviewClass";
@@ -8,7 +8,7 @@ import { User } from "@src/models/UserClass";
 export async function getAllArtists(): Promise<Artista[]> {
   const rawArtists = await fetchAllArtists();
   return rawArtists.map(
-    (artist: any) => new Artista(artist._id, artist.name, artist.albums)
+    (artist: any) => new Artista(artist._id, artist.name, artist.albums, artist.foto)
   );
 }
 
@@ -22,7 +22,7 @@ export async function getAllAlbums(): Promise<Album[]> {
 export async function getAllReviews(): Promise<Review[]> {
   const rawReviews = await fetchAllReviews();
   return rawReviews.map(
-    (review: any) => new Review(review._id, review.userId, review.ratingScore, review.content, new Date(review.fecha), review.likes)
+    (review: any) => new Review(review._id, review.userId, review.ratingScore, review.content, new Date(review.fecha), review.likes, review.albumId, review.comentarios)
   );
 }
 
@@ -35,7 +35,7 @@ export async function getAllUsers(): Promise<User[]> {
 
 export async function getArtistById(id: string): Promise<Artista | null> {
   const rawArtist = await fetchArtistById(id);
-  return rawArtist ? new Artista(rawArtist._id, rawArtist.name, rawArtist.albums) : null;
+  return rawArtist ? new Artista(rawArtist._id, rawArtist.name, rawArtist.albums, rawArtist.foto) : null;
 }
 
 export async function getAlbumById(id: string): Promise<Album | null> {
@@ -45,7 +45,7 @@ export async function getAlbumById(id: string): Promise<Album | null> {
 
 export async function getReviewById(id: string): Promise<Review | null> {
   const rawReview = await fetchReviewById(id);
-  return rawReview ? new Review(rawReview._id, rawReview.userId, rawReview.ratingScore, rawReview.content, new Date(rawReview.fecha), rawReview.likes) : null;
+  return rawReview ? new Review(rawReview._id, rawReview.userId, rawReview.ratingScore, rawReview.content, new Date(rawReview.fecha), rawReview.likes, rawReview.albumId, rawReview.comentarios) : null;
 }
 
 export async function getUserById(id: string): Promise<User | null> {
@@ -93,5 +93,10 @@ export async function fetchReviewsByIds(reviewIds: string[]): Promise<Review[]> 
 
 export async function getAlbumAvgRating(id: string): Promise<number | null> {
   const data = await fetchAlbumAvgRating(id);
+  return data.rating;
+}
+
+export async function getArtistaAvgRating(id: string): Promise<number | null> {
+  const data = await fetchArtistaAvgRating(id);
   return data.rating;
 }

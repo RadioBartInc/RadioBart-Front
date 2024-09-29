@@ -5,9 +5,11 @@
 		"src/routes/album/[id]/+page.ts"
 	],
 	"/artistas": [],
-	"/artista": [],
+	"/artista/[id]": [
+		"src/routes/artista/[id]/+page.ts"
+	],
 	"/login": [],
 	"/register": [],
-	"/review": [],
-	"/usuario": []
+	"/review/[id]": [],
+	"/usuario/[id]": []
 }
