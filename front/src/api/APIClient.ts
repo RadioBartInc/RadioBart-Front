@@ -8,7 +8,7 @@ import type { Review } from "@src/models/ReviewClass";
 //TODO: Add JWT auth system to send the token with every request
 //TODO: Add needed functions for comment class
 
-const BASE_URL = `http://${BACKEND_CONFIG.IP}:${BACKEND_CONFIG.PORT}`;
+const BASE_URL = `http://${BACKEND_CONFIG.IP}:${BACKEND_CONFIG.PORT}/api`;
 
 export async function fetchAllArtists(): Promise<any[]> {
   try {
@@ -102,7 +102,7 @@ export async function fetchAlbumAvgRating(id: string): Promise<any> {
 
 export async function fetchArtistaAvgRating(id: string): Promise<any> {
   try {
-    const response = await axios.get(`${BASE_URL}/artistas/avgRating/${id}`);
+    const response = await axios.get(`${BASE_URL}/artists/avgRating/${id}`);
     return response.data;
   } catch (error) {
     console.error('Error fetching average rating:', error);

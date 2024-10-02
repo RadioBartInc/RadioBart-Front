@@ -8,14 +8,14 @@ import { User } from "@src/models/UserClass";
 export async function getAllArtists(): Promise<Artista[]> {
   const rawArtists = await fetchAllArtists();
   return rawArtists.map(
-    (artist: any) => new Artista(artist._id, artist.name, artist.albums, artist.foto)
+    (artist: any) => new Artista(artist._id, artist.name, artist.albums, artist.picture)
   );
 }
 
 export async function getAllAlbums(): Promise<Album[]> {
   const rawAlbums = await fetchAllAlbums();
   return rawAlbums.map(
-    (album: any) => new Album(album._id, album.title, album.artist, album.year, album.genre, album.reviews, album.cover)
+    (album: any) => new Album(album._id, album.title, album.artist, new Date(album.fecha), album.genre, album.reviews, album.cover)
   );
 }
 
@@ -35,12 +35,12 @@ export async function getAllUsers(): Promise<User[]> {
 
 export async function getArtistById(id: string): Promise<Artista | null> {
   const rawArtist = await fetchArtistById(id);
-  return rawArtist ? new Artista(rawArtist._id, rawArtist.name, rawArtist.albums, rawArtist.foto) : null;
+  return rawArtist ? new Artista(rawArtist._id, rawArtist.name, rawArtist.albums, rawArtist.picture) : null;
 }
 
 export async function getAlbumById(id: string): Promise<Album | null> {
   const rawAlbum = await fetchAlbumById(id);
-  return rawAlbum ? new Album(rawAlbum._id, rawAlbum.title, rawAlbum.artist, rawAlbum.year, rawAlbum.genre, rawAlbum.reviews, rawAlbum.cover) : null;
+  return rawAlbum ? new Album(rawAlbum._id, rawAlbum.title, rawAlbum.artist, new Date(rawAlbum.fecha), rawAlbum.genre, rawAlbum.reviews, rawAlbum.cover) : null;
 }
 
 export async function getReviewById(id: string): Promise<Review | null> {
@@ -93,10 +93,10 @@ export async function fetchReviewsByIds(reviewIds: string[]): Promise<Review[]> 
 
 export async function getAlbumAvgRating(id: string): Promise<number | null> {
   const data = await fetchAlbumAvgRating(id);
-  return data.rating;
+  return data.averageRating;
 }
 
 export async function getArtistaAvgRating(id: string): Promise<number | null> {
   const data = await fetchArtistaAvgRating(id);
-  return data.rating;
+  return data.averageRating;
 }

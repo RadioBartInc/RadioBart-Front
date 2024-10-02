@@ -1,4 +1,3 @@
-<!-- NewestAlbums.svelte -->
 <script lang="ts">
     import { onMount } from 'svelte';
     import { getArtistById, getAllAlbums, getAlbumAvgRating } from '@src/api/APIAdapter';
@@ -9,12 +8,11 @@
     let albums: Album[] = [];
     let artists: Record<string, Artista | null> = {};
     let avgRatings: Record<string, number> = {};
-  
+    
     onMount(async () => {
       const allAlbums = await getAllAlbums();
-  
       albums = allAlbums.sort((a, b) => b.fecha.getTime() - a.fecha.getTime()).slice(0, 4);
-
+      
       for (const album of albums) {
         if (!artists[album.artist]) {
           artists[album.artist] = await fetchArtist(album.artist);

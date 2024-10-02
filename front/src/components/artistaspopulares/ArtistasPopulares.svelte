@@ -8,14 +8,13 @@
 
     onMount(async () => {
         const artists = await getAllArtists();
-
         for (const artist of artists) {
             avgRatings[artist.id] = (await getArtistaAvgRating(artist.id)) ?? 0;
         }
 
         topArtists = Object.entries(avgRatings)
         .sort(([, ratingA], [, ratingB]) => ratingB - ratingA)
-        .slice(0, 4) // Get the top 4
+        .slice(0, 4)
         .map(([artistId]) => artists.find(artist => artist.id === artistId))
         .filter((artist): artist is Artista => artist !== undefined);
     });

@@ -9,12 +9,12 @@
 
     onMount(async () => {
         if (artist) {
-        try {
-            const ratingRes = await getArtistaAvgRating(artist.id);
-            avg_rating = ratingRes || 0;
-        } catch (error) {
-            console.error("Failed to fetch artist rating:", error);
-        }
+            try {
+                const ratingRes = await getArtistaAvgRating(artist.id);
+                avg_rating = ratingRes || 0;
+            } catch (error) {
+                console.error("Failed to fetch artist rating:", error);
+            }
         }
     });
 </script>
