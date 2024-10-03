@@ -1,0 +1,1 @@
+export const REVIEW_PREVIEW_LIMIT = 150

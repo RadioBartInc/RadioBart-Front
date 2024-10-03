@@ -124,3 +124,15 @@ form{
     display: flex;
     justify-content: center;
 }
+
+.submission-message {
+    margin-left: 1rem;
+}
+
+.red{
+    color: red;
+}
+
+.green{
+    color: green;
+}

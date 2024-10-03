@@ -9,5 +9,19 @@ export class Review {
       public albumId: string,
       public comentarios: string[]
     ) {}
-  }
+  
+    toAPIFormat() {
+      return {
+        album: this.albumId,    // Matches the expected attribute name for album
+        rating: this.ratingScore,
+        review: this.content,
+        user: this.userId,
+        date: this.fecha.toISOString(), // Convert Date object to ISO string
+        comments: this.comentarios,
+        likes: this.likes
+      };
+    }
+}
+
+
   

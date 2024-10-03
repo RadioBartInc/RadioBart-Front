@@ -2,7 +2,7 @@
 	"/": [],
 	"/albums": [],
 	"/album/[id]": [
-		"src/routes/album/[id]/+page.server.ts"
+		"src/routes/album/[id]/+page.js"
 	],
 	"/artistas": [],
 	"/artista/[id]": [
@@ -10,6 +10,8 @@
 	],
 	"/login": [],
 	"/register": [],
-	"/review/[id]": [],
+	"/review/[id]": [
+		"src/routes/review/[id]/+page.js"
+	],
 	"/usuario/[id]": []
 }

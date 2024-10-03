@@ -3,7 +3,8 @@
 	import Review from '@src/components/review/Review.svelte';
 	import ReviewComentarios from '@src/components/reviewcomentarios/ReviewComentarios.svelte';
 
-    // TODO: Make this work dynamically
+    export let data
+
 </script>
 
 <style>
@@ -15,10 +16,10 @@
 
 <main>
     <section class="section-body" id="albums-recientes">
-        <Review/>
+        <Review id={data.id}/>
     </section>
     <section class="section-body" id="albums-populares">
         <h2 class="section-title">Comentarios</h2>
-        <ReviewComentarios/>
+        <ReviewComentarios id={data.id}/>
     </section>
 </main>

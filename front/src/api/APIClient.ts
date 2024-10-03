@@ -109,3 +109,37 @@ export async function fetchArtistaAvgRating(id: string): Promise<any> {
     throw error;
   }
 }
+
+export async function addReview(review: object): Promise<boolean | null> {
+  try {
+    const response = await axios.post(`${BASE_URL}/reviews`, review);
+    return response.status === 201;
+  } catch (error) {
+    console.error('Error adding review:', error);
+    return null;
+  }
+}
+
+export async function updateReview(reviewId: string, review: object): Promise<boolean | null> {
+  try {
+    const response = await axios.put(`${BASE_URL}/reviews/${reviewId}`, review);
+    return response.status === 200;
+  } catch (error) {
+    console.error('Error updating review:', error);
+    return null;
+  }
+}
+
+//TODO: Pedirle esta funcion a bul
+export async function updateReviewLike(reviewId: string, likeChange: number): Promise<boolean> {
+  try {
+    const response = await axios.put(`${BASE_URL}/reviews/${reviewId}/like`, {
+      likeChange,
+    });
+
+    return response.status === 200; // Return true if the request was successful
+  } catch (error) {
+    console.error(`Failed to update likes for review ${reviewId}:`, error);
+    return false;
+  }
+}

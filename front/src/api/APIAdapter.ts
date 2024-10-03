@@ -1,5 +1,5 @@
 // AlbumAdapter.ts
-import { fetchAllArtists, fetchAllReviews, fetchAllAlbums, fetchArtistById, fetchAlbumById, fetchReviewById, fetchAlbumAvgRating, fetchAllUsers, fetchUserById, fetchArtistaAvgRating } from "./APIClient";
+import { fetchAllArtists, fetchAllReviews, fetchAllAlbums, fetchArtistById, fetchAlbumById, fetchReviewById, fetchAlbumAvgRating, fetchAllUsers, fetchUserById, fetchArtistaAvgRating, updateReview, addReview, updateReviewLike } from "./APIClient";
 import { Album } from "@src/models/AlbumClass";
 import { Artista } from "@src/models/ArtistaClass";
 import { Review } from "@src/models/ReviewClass";
@@ -45,7 +45,9 @@ export async function getAlbumById(id: string): Promise<Album | null> {
 
 export async function getReviewById(id: string): Promise<Review | null> {
   const rawReview = await fetchReviewById(id);
-  return rawReview ? new Review(rawReview._id, rawReview.userId, rawReview.ratingScore, rawReview.content, new Date(rawReview.fecha), rawReview.likes, rawReview.albumId, rawReview.comentarios) : null;
+  console.log(rawReview)
+
+  return rawReview ? new Review(rawReview._id, rawReview.user, rawReview.rating, rawReview.review, new Date(rawReview.date), rawReview.likes, rawReview.album, rawReview.comments) : null;
 }
 
 export async function getUserById(id: string): Promise<User | null> {
@@ -99,4 +101,19 @@ export async function getAlbumAvgRating(id: string): Promise<number | null> {
 export async function getArtistaAvgRating(id: string): Promise<number | null> {
   const data = await fetchArtistaAvgRating(id);
   return data.averageRating;
+}
+
+export async function postReview(review: Review): Promise<boolean | null> {
+  const parsedReview = review.toAPIFormat(); // Convert Review instance to API format object
+  return await addReview(parsedReview);
+}
+
+// Function to handle updating an existing review
+export async function putReview(review: Review): Promise<boolean | null> {
+  const parsedReview = review.toAPIFormat(); // Convert Review instance to API format object
+  return await updateReview(review.id, parsedReview);
+}
+
+export async function putReviewLike(reviewId: string, likeChange: number): Promise<boolean> {
+  return await updateReviewLike(reviewId, likeChange) 
 }

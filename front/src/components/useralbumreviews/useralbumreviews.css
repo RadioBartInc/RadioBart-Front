@@ -42,19 +42,42 @@ section{
     margin-bottom: 1rem;
 }
 
+.heart {
+    transition: fill 0.3s ease;
+}
+
 .likes{
     display: flex;
     flex-direction: row;
     align-items: center;
 }
 
-.heart{
+.likes_button{
     max-width: 2rem;
     max-height: 2rem;
     margin-right: .5rem;
     margin-left: 1rem;
+    border: 0;
+    background: none;
+    cursor: pointer;
 }
-
 .likes-no{
     text-align: center;
 }
+
+.more_review {
+    margin-left: 1rem;
+} 
+
+.more_review button{
+    background: none;
+    cursor: pointer;
+    border: 0
+}
+
+.more_review button img{
+    max-width: 2rem;
+    max-height: 2rem;
+    height: 100%;
+}
+
