@@ -76,6 +76,27 @@ section{
     align-items: center;
 }
 
-.artista, .portada, .album{
+.artista{
+    margin-bottom: .25rem;
+}
+
+.portada, .album{
     margin-bottom: .5rem;
+    text-align: center;
+}
+
+.more_review {
+    margin-left: 1rem;
+} 
+
+.more_review button{
+    background: none;
+    cursor: pointer;
+    border: 0
+}
+
+.more_review button img{
+    max-width: 2rem;
+    max-height: 2rem;
+    height: 100%;
 }

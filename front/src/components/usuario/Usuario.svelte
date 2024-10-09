@@ -1,3 +1,4 @@
+<!-- TODO: Fetch all the data for a user -->
 <section>
     <div class="avatar-wrapper">
         <img src="https://via.placeholder.com/50" alt="Avatar" class="avatar">

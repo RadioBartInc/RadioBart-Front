@@ -54,3 +54,11 @@ nav{
     box-shadow: 0 0 4px var(--shadow-color);
     background-color: var(--hover-buttong-bg);
 }
+
+.logout{
+    color: var(--bad-rating-bg) !important; 
+}
+
+.register, .login{
+    color: var(--good-rating-bg) !important;
+}

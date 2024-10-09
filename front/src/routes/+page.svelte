@@ -3,6 +3,8 @@
     import ReviewsRecientes from '@src/components/reviewsrecientes/ReviewsRecientes.svelte';
     import AlbumesNuevos from '@src/components/albumesnuevos/AlbumesNuevos.svelte';
     import ArtistasPopulares from '@src/components/artistaspopulares/ArtistasPopulares.svelte';
+
+    // TODO: Make it so that it sends you to a register/login section if there isnt an active session
 </script>
 
 <style>

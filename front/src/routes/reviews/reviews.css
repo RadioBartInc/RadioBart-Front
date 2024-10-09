@@ -1,0 +1,12 @@
+section{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 3rem;
+}
+
+.review-divider {
+    margin: 2rem 0;
+    border-top: 0.05rem solid var(--elem-bg);
+    width: 100%;
+}

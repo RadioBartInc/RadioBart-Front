@@ -18,15 +18,19 @@ section{
     width: 4rem;
 }
 
-form{
-    display: flex;
-    flex-direction: column;
+.form-section{
     grid-area: form;
-    justify-content: space-between;
     margin-left: .5rem;
     background-color: var(--form-review-bg);
     border-radius: .5rem;
     padding: .5rem;
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
 }
 
 .portada{
@@ -123,4 +127,17 @@ form{
     width: 100%;
     display: flex;
     justify-content: center;
+}
+
+.submission-message {
+    margin-left: 1rem;
+}
+
+.login-message{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
 }

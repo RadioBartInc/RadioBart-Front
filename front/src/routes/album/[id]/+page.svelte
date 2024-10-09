@@ -1,10 +1,9 @@
 <script>
     import Navbar from '@src/components/navbar/Navbar.svelte';
     import AlbumPage from '@src/components/albumpage/AlbumPage.svelte';
-	import UserAlbumReviews from '@src/components/useralbumreviews/UserAlbumReviews.svelte';
+    import UserAlbumReviews from '@src/components/useralbumreviews/UserAlbumReviews.svelte';
 
-    export let album;
-    export let reviews;
+    export let data
 </script>
 
 <style>
@@ -16,12 +15,11 @@
 
 <main>
     <section class="section-body">
-        <AlbumPage {album} />
+        <AlbumPage id={data.id}/>
     </section>
-    
+
     <section class="section-body">
         <h2 class="section-title">Reviews recientes</h2>
-        <UserAlbumReviews {reviews} />
+        <UserAlbumReviews id={data.id}/>
     </section>
 </main>
-

@@ -10,6 +10,8 @@ section{
 
 .artista_foto{
     border-radius: 100vw;
+    object-fit: cover;
+    object-position: center; 
 }
 
 .artista{
