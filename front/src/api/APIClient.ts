@@ -4,8 +4,6 @@ import axios from "axios";
 import { BACKEND_CONFIG } from "@src/config";
 import type { Review } from "@src/models/ReviewClass";
 
-//TODO: Add JWT auth system to get the token
-//TODO: Add JWT auth system to send the token with every request
 //TODO: Add needed functions for comment class
 
 const BASE_URL = `http://${BACKEND_CONFIG.IP}:${BACKEND_CONFIG.PORT}/api`;

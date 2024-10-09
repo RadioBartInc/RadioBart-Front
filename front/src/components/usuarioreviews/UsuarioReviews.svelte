@@ -6,6 +6,7 @@
 	import type { Album } from "@src/models/AlbumClass";
 	import type { Artista } from "@src/models/ArtistaClass";
     
+    //TODO: No se si esto funciona
     export let id: string;
     let reviews: Review[] = [];
     let reviewAlbums: Record<string, Album> = {};
