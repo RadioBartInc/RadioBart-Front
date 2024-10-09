@@ -6,12 +6,15 @@
 	],
 	"/artistas": [],
 	"/artista/[id]": [
-		"src/routes/artista/[id]/+page.ts"
+		"src/routes/artista/[id]/+page.js"
 	],
 	"/login": [],
 	"/register": [],
+	"/reviews": [],
 	"/review/[id]": [
 		"src/routes/review/[id]/+page.js"
 	],
-	"/usuario/[id]": []
+	"/usuario/[id]": [
+		"src/routes/usuario/[id]/+page.js"
+	]
 }

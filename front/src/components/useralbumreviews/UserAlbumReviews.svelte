@@ -76,7 +76,7 @@
               </svg>
             </button>
             <p class="likes-no">{reviewLikeCounts[review.id]}</p>
-            <a class="more_review" href="../review/{review.id}">
+            <a class="more_review" href="/review/{review.id}">
               <button><img src="https://via.placeholder.com/50" alt=""></button>
             </a>
           </div>

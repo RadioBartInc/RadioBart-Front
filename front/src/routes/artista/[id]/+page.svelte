@@ -3,8 +3,7 @@
     import Artista from '@src/components/artista/Artista.svelte';
 	import ArtistaAlbums from '@src/components/artistaalbums/ArtistaAlbums.svelte';
 
-    export let artist; 
-    export let albums;
+    export let data
 </script>
 
 <style>
@@ -16,11 +15,11 @@
 
 <main>
     <section class="section-body">
-        <Artista {artist}/>
+        <Artista id={data.id}/>
     </section>
     <section class="section-body">
         <h2 class="section-title">Albumes</h2>
-        <ArtistaAlbums {albums}/>
+        <ArtistaAlbums id={data.id}/>
     </section>
 </main>
   

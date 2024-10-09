@@ -110,9 +110,13 @@ export async function fetchArtistaAvgRating(id: string): Promise<any> {
   }
 }
 
-export async function addReview(review: object): Promise<boolean | null> {
+export async function addReview(review: object, token: string): Promise<boolean | null> {
   try {
-    const response = await axios.post(`${BASE_URL}/reviews`, review);
+    const response = await axios.post(`${BASE_URL}/reviews`, review, {
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    });
     return response.status === 201;
   } catch (error) {
     console.error('Error adding review:', error);
@@ -120,9 +124,13 @@ export async function addReview(review: object): Promise<boolean | null> {
   }
 }
 
-export async function updateReview(reviewId: string, review: object): Promise<boolean | null> {
+export async function updateReview(reviewId: string, review: object, token: string): Promise<boolean | null> {
   try {
-    const response = await axios.put(`${BASE_URL}/reviews/${reviewId}`, review);
+    const response = await axios.put(`${BASE_URL}/reviews/${reviewId}`, review, {
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    });
     return response.status === 200;
   } catch (error) {
     console.error('Error updating review:', error);
@@ -130,16 +138,67 @@ export async function updateReview(reviewId: string, review: object): Promise<bo
   }
 }
 
-//TODO: Pedirle esta funcion a bul
 export async function updateReviewLike(reviewId: string, likeChange: number): Promise<boolean> {
   try {
-    const response = await axios.put(`${BASE_URL}/reviews/${reviewId}/like`, {
-      likeChange,
+    const response = await axios.put(`${BASE_URL}/reviews/like/${reviewId}`, null, {
+      params: {
+        likes: likeChange
+      }
     });
 
-    return response.status === 200; // Return true if the request was successful
+    return response.status === 200; 
   } catch (error) {
     console.error(`Failed to update likes for review ${reviewId}:`, error);
     return false;
+  }
+}
+
+export async function fetchAllComentarios(): Promise<any> {
+  try {
+    const response = await axios.get(`${BASE_URL}/comments/`);
+    return response.data;
+  } catch (error) {
+    console.error(`Error fetching comments`, error);
+    throw error;
+  }
+}
+
+export async function fetchComentarioById(commentId: string): Promise<any> {
+  try {
+    const response = await axios.get(`${BASE_URL}/comments/${commentId}`);
+    return response.data;
+  } catch (error) {
+    console.error(`Error fetching comment with ID: ${commentId}`, error);
+    throw error;
+  }
+}
+
+export async function addComentario(comment: object): Promise<boolean | null> {
+  try {
+    const response = await axios.post(`${BASE_URL}/comments`, comment);
+    return response.status === 201;
+  } catch (error) {
+    console.error('Error adding comment:', error);
+    return null;
+  }
+}
+
+export async function addUser(user: object): Promise<boolean | null> {
+  try {
+    const response = await axios.post(`${BASE_URL}/users`, user);
+    return response.status === 201;
+  } catch (error) {
+    console.error('Error adding user:', error);
+    return null;
+  }
+}
+
+export async function authUser(user: object): Promise<string | null> {
+  try {
+    const response = await axios.post(`${BASE_URL}/auth`, user);
+    return response.data.token;
+  } catch (error) {
+    console.error('Error authenticating user:', error);
+    return null;
   }
 }

@@ -79,6 +79,8 @@
     z-index: 1; 
     max-width: 150px;
     max-height: 150px;
+    object-fit: cover;
+    object-position: center; 
 }
 
 :global(.hover-image:hover) {
@@ -97,4 +99,12 @@
     margin-bottom: 1rem;
     border-bottom: 1px solid var(--light-elem-bg);
     box-shadow: 0 3px 2px -3px var(--light-elem-bg);
+}
+
+:global(.red){
+    color: var(--bad-rating-bg);
+}
+
+:global(.green){
+    color: var(--good-rating-bg);
 }

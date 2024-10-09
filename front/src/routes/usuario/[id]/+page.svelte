@@ -3,7 +3,7 @@
 	import Usuario from '@src/components/usuario/Usuario.svelte';
     import UsuarioReviews from '@src/components/usuarioreviews/UsuarioReviews.svelte'
 
-    // TODO: Make this work dynamically
+    export let data
 </script>
 
 <style>
@@ -15,11 +15,11 @@
 
 <main>
     <section class="section-body">
-        <Usuario/>
+        <Usuario id={data.id}/>
     </section>
     <section class="section-body">
         <h2 class="section-title titulo-rev">Reviews</h2>
-        <UsuarioReviews/>
+        <UsuarioReviews id={data.id}/>
     </section>
 </main>
   

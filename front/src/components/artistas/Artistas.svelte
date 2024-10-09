@@ -7,6 +7,7 @@
   
     onMount(async () => {
       artists = await getAllArtists();
+      console.log(artists)
     });
 
   </script>

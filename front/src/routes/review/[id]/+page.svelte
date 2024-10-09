@@ -4,7 +4,6 @@
 	import ReviewComentarios from '@src/components/reviewcomentarios/ReviewComentarios.svelte';
 
     export let data
-
 </script>
 
 <style>

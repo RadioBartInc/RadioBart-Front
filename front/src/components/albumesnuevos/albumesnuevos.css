@@ -6,11 +6,13 @@ section{
 .artista{
     font-size: 1.2rem;
     margin: .3rem 0;
+    text-align: center;
 }
 
 .nombre_album{
     font-size: 1.0rem;
     margin-bottom: .3rem;
+    text-align: center;
 }
 
 .rating{
