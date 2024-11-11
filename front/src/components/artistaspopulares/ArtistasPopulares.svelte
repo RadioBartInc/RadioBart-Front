@@ -23,7 +23,9 @@
 <section>
     {#each topArtists as artist, index}
         <div class="artista">
-        <img src={artist.foto || 'https://via.placeholder.com/150'} alt="artista_foto" class="artista_foto hover-image">
+        <a href={`/artista/${artist.id}`}>
+            <img src={artist.foto || 'https://via.placeholder.com/150'} alt="artista_foto" class="artista_foto hover-image">
+        </a>
         <h3 class="artista_nombre">
             <a href={`/artista/${artist.id}`}>{artist.name}</a>
         </h3>

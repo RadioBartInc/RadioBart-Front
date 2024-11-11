@@ -4,8 +4,6 @@ import axios from "axios";
 import { BACKEND_CONFIG } from "@src/config";
 import type { Review } from "@src/models/ReviewClass";
 
-//TODO: Add JWT auth system to get the token
-//TODO: Add JWT auth system to send the token with every request
 //TODO: Add needed functions for comment class
 
 const BASE_URL = `http://${BACKEND_CONFIG.IP}:${BACKEND_CONFIG.PORT}/api`;
@@ -173,9 +171,12 @@ export async function fetchComentarioById(commentId: string): Promise<any> {
   }
 }
 
-export async function addComentario(comment: object): Promise<boolean | null> {
+export async function addComentario(comment: object, token: string): Promise<boolean | null> {
   try {
-    const response = await axios.post(`${BASE_URL}/comments`, comment);
+    const response = await axios.post(`${BASE_URL}/comments`, comment,{
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }});
     return response.status === 201;
   } catch (error) {
     console.error('Error adding comment:', error);
@@ -195,10 +196,64 @@ export async function addUser(user: object): Promise<boolean | null> {
 
 export async function authUser(user: object): Promise<string | null> {
   try {
+    console.log(user);
     const response = await axios.post(`${BASE_URL}/auth`, user);
     return response.data.token;
   } catch (error) {
     console.error('Error authenticating user:', error);
     return null;
+  }
+}
+
+export async function fetchUserStats(userId: string): Promise<any> {
+  try {
+    const response = await axios.get(`${BASE_URL}/users/stats/${userId}`);
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching user stats:', error);
+    throw error;
+  }
+}
+
+export async function putReviewLikes(reviewId: string, token: string, likeInfo: object): Promise<any> {
+  try {
+    const response = await axios.put(`${BASE_URL}/reviews/like/${reviewId}`, likeInfo, {
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }});
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching review likes:', error);
+    throw error;
+  }
+}
+
+export async function addAlbum(album: object, token: string, admin_secret: string, user_id: string): Promise<boolean | null> {
+  try {
+    const response = await axios.post(`${BASE_URL}/albums`, album, {
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    });
+    return response.status === 201;
+  }
+  catch (error) {
+    console.error('Error adding album:', error);
+    throw error;
+  }
+}
+
+export async function addArtista(artist: object, token: string, admin_secret: string, user_id: string): Promise<boolean | null> {
+  try {
+    const response = await axios.post(`${BASE_URL}/artists`, artist, {
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    });
+    return response.status === 201;
+  }
+  catch (error) {
+    console.error('Error adding album:', error);
+    throw error;
   }
 }

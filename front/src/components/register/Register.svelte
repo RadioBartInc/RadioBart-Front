@@ -30,7 +30,7 @@
             return;
         }
 
-        const user = new User("", username, password, "https://via.placeholder.com/50");
+        const user = new User("", username, password, "https://via.placeholder.com/50", false);
 
         try {
             const userExists = await checkUserExists(user);

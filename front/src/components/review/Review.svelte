@@ -1,11 +1,12 @@
 <script lang="ts">
   import { onMount } from "svelte";
-  import { getReviewById, getUserById, getAlbumById, putReviewLike, getArtistById } from "@src/api/APIAdapter";
+  import { getReviewById, getUserById, getAlbumById, getArtistById, updateReviewLikes} from "@src/api/APIAdapter";
   import type { Review } from "@src/models/ReviewClass";
   import { User } from "@src/models/UserClass";
   import type { Album } from "@src/models/AlbumClass";
   import { getRatingClass } from "@src/utils/misc";
   import { Artista } from "@src/models/ArtistaClass";
+	import { putReviewLikes, updateReviewLike } from "@src/api/APIClient";
 
   export let id: string;
   export let showMoreButton: boolean = false; // New prop to show or hide "More Review" button
@@ -18,16 +19,16 @@
   let likeCount = 0;
   let likedByUser = false;
 
+  let token: string | null = "";
   async function fetchData() {
     try {
+      token = localStorage.getItem("token");
+
       review = await getReviewById(id);
 
       if (review) {
-        user = new User(
-          review.userId,
-          "Usuario",
-          "https://via.placeholder.com/50",
-        );
+        
+        user = await getUserById(review.userId);
 
         album = await getAlbumById(review.albumId);
 
@@ -46,9 +47,9 @@
   onMount(fetchData);
 
   async function toggleLike() {
-    if (review) {
+    if (review && user && token) {
       try {
-        const response = await putReviewLike(review.id, likedByUser ? -1 : 1);
+        const response = await updateReviewLikes(review.id, token, likeCount + (likedByUser ? -1 : 1), user.id);
         if (response) {
           likeCount += likedByUser ? -1 : 1;
           likedByUser = !likedByUser;
@@ -63,7 +64,9 @@
 <section>
   {#if review && album && user && artist}
     <div class="info">
-      <img src={album.cover} alt="Album Cover" class="portada hover-image">
+      <a href="{`/album/${album.id}`}">
+        <img src={album.cover} alt="Album Cover" class="portada hover-image">
+      </a>
       <h3 class="artista"><a href={`/artista/${artist.id}`}>{artist.name}</a></h3>
       <h3 class="album"><a href={`/album/${album.id}`}>{album.title}</a></h3>
       <div class="rating-wrapper">
@@ -75,7 +78,9 @@
     <div class="review">
       <div class="usuario">
         <div class="info_usuario">
-          <img src={user.profile_picture || 'https://via.placeholder.com/50'} alt="User Avatar" class="avatar">
+          <a href="{`/usuario/${user.id}`}">
+            <img src={user.profile_picture || 'https://via.placeholder.com/50'} alt="User Avatar" class="avatar">
+          </a>
           <p><a href={`/usuario/${user.id}`}>{user.name}</a></p>
           <div class="likes">
             <button class="like-button" on:click={toggleLike}>

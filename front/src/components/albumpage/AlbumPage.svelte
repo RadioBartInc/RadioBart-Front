@@ -92,7 +92,8 @@
           new Date(),
           0,        
           album!.id,
-          []          
+          [],
+          []  
         );
 
         const response = await postReview(newReview, token ?? '');

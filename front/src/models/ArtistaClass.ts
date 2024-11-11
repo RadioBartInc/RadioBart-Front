@@ -5,5 +5,12 @@ export class Artista {
       public albums: string[],
       public foto: string
     ) {}
+    toAPIFormat() {
+      return {
+        name: this.name,
+        albums: this.albums,
+        picture: this.foto
+      };
+    }
   }
   

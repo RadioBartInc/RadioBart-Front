@@ -3,7 +3,9 @@ export class User {
       public id: string,
       public name: string,
       public password: string,
-      public profile_picture: string
+      public profile_picture: string,
+      public role: boolean,
+      public admin_secret?: string
     ) {}
     
     toAPIFormat() {
@@ -16,7 +18,7 @@ export class User {
 
     static fromObject(obj: any): User | null { 
       if (this.isUser(obj)){
-        return new User( obj.id, obj.name, obj.password, obj.profile_picture ); 
+        return new User( obj.id, obj.name, obj.password, obj.profile_picture, obj.role); 
       }
 
       return null
@@ -26,7 +28,8 @@ export class User {
       return obj.id !== undefined && 
         obj.name !== undefined && 
         obj.password !== undefined && 
-        obj.profile_picture !== undefined;
+        obj.profile_picture !== undefined &&
+        obj.role !== undefined;
     }
 }
   

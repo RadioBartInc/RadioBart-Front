@@ -49,7 +49,9 @@
     {#if artist}
         {#each albums as album}
             <div class="album">
-                <img src={album.cover || 'https://via.placeholder.com/150'} alt="album_cover" class="portada hover-image">
+                <a href="{`/album/${album.id}`}">
+                    <img src={album.cover || 'https://via.placeholder.com/150'} alt="album_cover" class="portada hover-image">
+                </a>
                 <h3 class="nombre_album"><a href={`/album/${album.id}`}>{album.title}</a></h3>
                 <p class="rating {getRatingClass(avgRatings[album.id])}">{avgRatings[album.id]}</p>
             </div>

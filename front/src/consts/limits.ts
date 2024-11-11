@@ -1,1 +1,2 @@
 export const REVIEW_PREVIEW_LIMIT = 150
+export const MAX_COMMENT_LENGTH = 255

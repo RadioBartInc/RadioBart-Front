@@ -49,7 +49,9 @@
 <section>
   {#each albums as album}
     <div class="album">
-      <img src={album.cover || 'https://via.placeholder.com/150'} alt="album_cover" class="portada hover-image">
+      <a href="{`/album/${album.id}`}">
+        <img src={album.cover || 'https://via.placeholder.com/150'} alt="album_cover" class="portada hover-image">
+      </a>
       <h3 class="artista">
         <a href={`/artista/${album.artist}`}>{artists[album.artist]?.name}</a>
       </h3>
