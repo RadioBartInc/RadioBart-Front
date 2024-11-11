@@ -1,0 +1,1 @@
+{"version":3,"file":"limits-BYNgvmO9.js","sources":["../../../.svelte-kit/adapter-node/chunks/limits.js"],"sourcesContent":["const REVIEW_PREVIEW_LIMIT = 150;\nexport {\n  REVIEW_PREVIEW_LIMIT as R\n};\n"],"names":[],"mappings":"AAAK,MAAC,oBAAoB,GAAG;;;;"}
