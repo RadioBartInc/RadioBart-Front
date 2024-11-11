@@ -1,5 +1,6 @@
 {
 	"/": [],
+	"/addArtist": [],
 	"/albums": [],
 	"/album/[id]": [
 		"src/routes/album/[id]/+page.js"
@@ -7,6 +8,9 @@
 	"/artistas": [],
 	"/artista/[id]": [
 		"src/routes/artista/[id]/+page.js"
+	],
+	"/artista/[id]/addAlbum": [
+		"src/routes/artista/[id]/addAlbum/+page.js"
 	],
 	"/login": [],
 	"/register": [],
