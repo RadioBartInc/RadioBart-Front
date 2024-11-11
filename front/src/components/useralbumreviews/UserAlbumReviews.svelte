@@ -3,17 +3,18 @@
   import type { Review } from '@src/models/ReviewClass';
   import { User } from '@src/models/UserClass';
   import { getRatingClass } from '@src/utils/misc';
-  import { fetchReviewsByIds, getAlbumById, getUserById } from '@src/api/APIAdapter';
+  import { fetchReviewsByIds, getAlbumById, getUserById, updateReviewLikes } from '@src/api/APIAdapter';
   import { REVIEW_PREVIEW_LIMIT } from '@src/consts/limits';
 
   export let id;
 
   export let reviews: Review[] = [];
   let users: Record<string, User | null> = {};
-
+  
   let reviewLikedState: Record<string, boolean> = {};
   let reviewLikeCounts: Record<string, number> = {};
-
+  let isCooldownActive: Record<string, boolean> = {};
+  
   // Function to fetch a user based on their ID
   async function fetchUser(userId: string): Promise<User | null> {
     try {
@@ -23,9 +24,11 @@
       return null;
     }
   }
-
+  
   onMount(async () => {
     try {
+      let user = User.fromObject(JSON.parse(localStorage.getItem('user') || ''));
+
       const album = await getAlbumById(id);
       if (album) {
         reviews = await fetchReviewsByIds(album.reviews);
@@ -33,26 +36,58 @@
           if (!users[review.userId]) {
             users[review.userId] = await fetchUser(review.userId);
           }
-          reviewLikedState[review.id] = false;
+
+          if(user){
+            reviewLikedState[review.id] = review.userLikes.includes(user.id);
+          } else {
+            reviewLikedState[review.id] = false;
+          }
           reviewLikeCounts[review.id] = review.likes;
+          isCooldownActive[review.id] = false;
         }
       }
     } catch (error) {
       console.error("Failed to fetch album data:", error);
     }
   });
+  
+  
+  async function toggleLike(reviewId: string) {
+    let token = localStorage.getItem('token'); 
+    let user = User.fromObject(JSON.parse(localStorage.getItem('user') || ''));
+    
+    if (!token || !user) {
+      return;
+    }
+    
+    if (isCooldownActive[reviewId]) {
+      console.log('Please wait before liking again.');
+      return;
+    }
 
-  // Function to toggle the like state of a review
-  function toggleLike(reviewId: string) {
     if (reviewLikedState[reviewId]) {
       reviewLikeCounts[reviewId] -= 1;
     } else {
       reviewLikeCounts[reviewId] += 1;
     }
     reviewLikedState[reviewId] = !reviewLikedState[reviewId];
+
+    try {
+      await updateReviewLikes(reviewId, token, reviewLikeCounts[reviewId], user.id);
+      console.log('Review like updated successfully');
+    } catch (error) {
+      console.error('Error updating review like:', error);
+      reviewLikedState[reviewId] = !reviewLikedState[reviewId];
+      reviewLikeCounts[reviewId] += reviewLikedState[reviewId] ? 1 : -1;
+    }
+
+    // Set cooldown for 2 seconds to prevent spam
+    isCooldownActive[reviewId] = true;
+    setTimeout(() => {
+      isCooldownActive[reviewId] = false;
+    }, 2000); // Cooldown of 2 seconds
   }
 
-  // Function to get a shortened preview of the review content
   function getReviewPreview(content: string): string {
     if (content.length > REVIEW_PREVIEW_LIMIT) {
       return content.slice(0, REVIEW_PREVIEW_LIMIT) + '...';
@@ -67,7 +102,9 @@
       <div class="usuario">
         <div class="info_usuario">
           <p class="rating {getRatingClass(review.ratingScore)}">{review.ratingScore}</p>
-          <img src={users[review.userId]?.profile_picture || 'https://via.placeholder.com/50'} alt="Avatar" class="avatar">
+          <a href="{`/usuario/${review.userId}`}">
+            <img src={users[review.userId]?.profile_picture || 'https://via.placeholder.com/50'} alt="Avatar" class="avatar">
+          </a>
           <p><a href={`/usuario/${review.userId}`}>{users[review.userId]?.name || review.userId}</a></p>
           <div class="likes">
             <button class="likes_button" on:click={() => toggleLike(review.id)}>

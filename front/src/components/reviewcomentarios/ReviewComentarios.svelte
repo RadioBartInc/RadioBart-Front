@@ -1,17 +1,32 @@
 <script lang="ts">
 	import { fetchComentariosById, getReviewById, getUserById, postComentario } from '@src/api/APIAdapter';
+	import { MAX_COMMENT_LENGTH } from '@src/consts/limits';
 	import { Comentario } from '@src/models/ComentarioClass';
 	import type { Review } from '@src/models/ReviewClass';
-	import type { User } from '@src/models/UserClass';
+	import { User } from '@src/models/UserClass';
     import { onMount } from 'svelte';
     
     export let id: string;
     let comentarios: Comentario[] = [];
     let review: Review | null = null;
     let comentarioUser: Record<string, User> = {};
-
+    
+    let token: string | null;
+    let user: User | null;
+    let userId: string | null;
+    
     onMount(async () => {
         try{
+            token = localStorage.getItem('token');
+      
+            if (token) {
+                const userObject = JSON.parse(localStorage.getItem('user') || '');
+                user = userObject ? User.fromObject(userObject) : null;
+                if (user) {
+                    userId = user.id;
+                }
+            }
+
             review = await getReviewById(id);
             if (review){
                 comentarios = await fetchComentariosById(review.comentarios);
@@ -49,8 +64,8 @@
     async function submitComment() {
 		try {
             newComment = newComment.trim()
-            if (review && newComment.length > 0){
-                submitedComment = new Comentario('', newComment, "66fed4cfb816132fbadbd955", new Date(Date.now()), review.id);
+            if (review && userId && token && (newComment.length > 0 || newComment.length < MAX_COMMENT_LENGTH)) {
+                submitedComment = new Comentario('', newComment, userId, new Date(Date.now()), review.id);
 
                 newComment = '';
             } else {
@@ -58,8 +73,8 @@
                 message = "Please enter a valid comment.";
                 return;
             }
-
-			const response = await postComentario(submitedComment);
+            
+			const response = await postComentario(submitedComment, token);
 
             if (response) {
                 messageColor = "green";
@@ -86,7 +101,9 @@
         <div class="comentario">
             <div class="usuario">
                 <div class="info_usuario">
-                    <img src={comentarioUser[comentario.id]?.profile_picture || 'https://via.placeholder.com/150'} alt="Avatar" class="avatar">
+                    <a href="/usuario/{comentarioUser[comentario.id]?.id}">
+                        <img src={comentarioUser[comentario.id]?.profile_picture || 'https://via.placeholder.com/150'} alt="Avatar" class="avatar">
+                    </a>
                     <p><a href="./{comentarioUser[comentario.id]?.id}">{comentarioUser[comentario.id]?.name}</a></p>
                 </div>
             </div>

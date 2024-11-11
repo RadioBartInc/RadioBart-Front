@@ -7,7 +7,8 @@ export class Review {
       public fecha: Date,
       public likes: number,
       public albumId: string,
-      public comentarios: string[]
+      public comentarios: string[],
+      public userLikes: string[]
     ) {}
   
     toAPIFormat() {
@@ -18,7 +19,8 @@ export class Review {
         user: this.userId,
         date: this.fecha.toISOString(), // Convert Date object to ISO string
         comments: this.comentarios,
-        likes: this.likes
+        likes: this.likes,
+        usuarioLike: this.userLikes
       };
     }
 }

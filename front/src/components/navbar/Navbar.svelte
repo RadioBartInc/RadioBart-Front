@@ -37,7 +37,7 @@
         {#if token && user}
             <li>
                 <a href="/usuario/{user.id}"><button class="perfil">
-                    <img class="avatar" src="https://via.placeholder.com/50" alt="Profile">
+                    <img class="avatar" src="{user.profile_picture || 'https://via.placeholder.com/50'}" alt="Profile">
                 </button></a>
             </li>
             <li>
