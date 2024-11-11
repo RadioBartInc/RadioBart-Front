@@ -81,6 +81,7 @@ declare module '$env/static/private' {
 	export const DISPLAY: string;
 	export const LANG: string;
 	export const XDG_CURRENT_DESKTOP: string;
+	export const DOTNET_BUNDLE_EXTRACT_BASE_DIR: string;
 	export const XMODIFIERS: string;
 	export const XDG_SESSION_DESKTOP: string;
 	export const XAUTHORITY: string;
@@ -200,6 +201,7 @@ declare module '$env/dynamic/private' {
 		DISPLAY: string;
 		LANG: string;
 		XDG_CURRENT_DESKTOP: string;
+		DOTNET_BUNDLE_EXTRACT_BASE_DIR: string;
 		XMODIFIERS: string;
 		XDG_SESSION_DESKTOP: string;
 		XAUTHORITY: string;
