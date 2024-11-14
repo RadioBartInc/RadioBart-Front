@@ -1,5 +1,6 @@
 <script lang="ts">
-  import { getAlbumAvgRating, getAlbumById, getArtistById, getAllReviews, postReview, putReview } from "@src/api/APIAdapter";
+	import { goto } from "$app/navigation";
+  import { getAlbumAvgRating, getAlbumById, getArtistById, getAllReviews, postReview, putReview, deleteAlbum } from "@src/api/APIAdapter";
   import type { Album } from "@src/models/AlbumClass";
   import type { Artista } from "@src/models/ArtistaClass";
   import { Review } from "@src/models/ReviewClass";
@@ -79,6 +80,8 @@
           message = "¡Reseña actualizada con éxito!";
           userRating = "";
           userReview = "";
+
+          window.location.reload();
         } else {
           messageColor = "red";
           message = "No se pudo actualizar la reseña. Inténtalo más tarde.";
@@ -103,6 +106,8 @@
           message = "¡Reseña enviada con éxito!";
           userRating = "";
           userReview = "";
+  
+          window.location.reload();
         } else {
           messageColor = "red";
           message = "No se pudo enviar la reseña. Inténtalo más tarde.";
@@ -113,6 +118,14 @@
       messageColor = "red";
       message = "Ocurrió un error al enviar la reseña.";
     }
+  }
+
+  async function callDeleteAlbum() {
+    if (album) {
+      await deleteAlbum(album.id ?? "", token ?? "");
+    }
+
+    goto('/');  
   }
 </script>
 
@@ -157,6 +170,9 @@
       <p class="login-message">Logeate para escribir una review</p>
       {/if}
     </div>
+  {/if}
+  {#if user && user.role}
+    <button on:click={callDeleteAlbum} class="admin-button bg-red">Borrar Album</button>
   {/if}
 </section>
 

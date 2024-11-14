@@ -13,5 +13,5 @@
 <Navbar/>
 
 <main>
-        <Albums/>
+    <Albums/>
 </main>

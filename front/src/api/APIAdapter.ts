@@ -3,14 +3,14 @@ import { fetchAllArtists, fetchAllReviews, fetchAllAlbums, fetchArtistById, fetc
   fetchReviewById, fetchAlbumAvgRating, fetchAllUsers, fetchUserById, 
   fetchArtistaAvgRating, updateReview, addReview, fetchComentarioById, 
   fetchAllComentarios, addComentario, addUser, authUser, fetchUserStats, 
-  putReviewLikes,
-  addAlbum,
-  addArtista} from "./APIClient";
+  putReviewLikes, addAlbum, addArtista, deleteClientReview, deleteClientComment, 
+  deleteClientAlbum, deleteClientArtist} from "./APIClient";
 import { Album } from "@src/models/AlbumClass";
 import { Artista } from "@src/models/ArtistaClass";
 import { Comentario } from "@src/models/ComentarioClass";
 import { Review } from "@src/models/ReviewClass";
 import { User } from "@src/models/UserClass";
+
 import { UserStats } from "@src/models/UserStats";
 
 export async function getAllArtists(): Promise<Artista[]> {
@@ -212,4 +212,20 @@ export async function updateReviewLikes(reviewId: string, token: string, likes: 
   }
   
   return await putReviewLikes(reviewId, token, likeInfo);
+}
+
+export async function deleteReview(reviewId: string, token: string): Promise<boolean | null> {
+  return await deleteClientReview(reviewId, token);
+}
+
+export async function deleteComment(commentId: string, token: string): Promise<boolean | null> {
+  return await deleteClientComment(commentId, token);
+}
+
+export async function deleteAlbum(albumId: string, token: string): Promise<boolean | null> {
+  return await deleteClientAlbum(albumId, token);
+}
+
+export async function deleteArtist(artistId: string, token: string): Promise<boolean | null> {
+  return await deleteClientArtist(artistId, token);
 }
