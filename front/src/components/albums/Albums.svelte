@@ -1,6 +1,6 @@
 <script lang="ts">
   import { onMount } from 'svelte';
-  import { getArtistById, getAllAlbums, getAlbumAvgRating } from '@src/api/APIAdapter';
+  import { getArtistById, getAllAlbums, getAlbumAvgRating, getAlbumsPage } from '@src/api/APIAdapter';
   import type { Album } from '@src/models/AlbumClass';
   import type { Artista } from '@src/models/ArtistaClass';
   import { getRatingClass } from "@src/utils/misc";
@@ -10,39 +10,38 @@
   export let avgRatings: Record<string, number> = {};
 
   let perPage = 8;                
-  let currentPage = 0;            
-  let totalRows = albums.length;  
+  let currentPage = 1;            
+  let totalRows =  1  
   let totalPages = Math.ceil(totalRows / perPage);  
-  let trimmedRows: Album[] = [];
-  let searchQuery = '';            // Search query for filtering
-
-  // Computed rows to display based on pagination and search
+  let searchQuery = ''; 
+  let searchFlag = false
   $: {
     const start = currentPage * perPage;
     const end = currentPage === totalPages - 1 ? totalRows - 1 : start + perPage - 1;
-    const filteredAlbums = searchQuery
-      ? albums.filter(album => 
-          album.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-          (artists[album.artist]?.name || '').toLowerCase().includes(searchQuery.toLowerCase())
-        )
-      : albums;
-    totalRows = filteredAlbums.length;
+    const newSearch = searchFlag
+    fetchAlbumPage(currentPage);
+    searchFlag = false
+  }
+  
+  async function fetchAlbumPage(page: number){
+    console.log("page: " + page + " perPage: " + perPage + " searchQuery: " + searchQuery)
+    let response = await getAlbumsPage(page, perPage, searchQuery);
+    
+    albums = response[0]
+    totalRows =  response[1]
     totalPages = Math.ceil(totalRows / perPage);
-    trimmedRows = filteredAlbums.slice(start, end + 1);
+
+    artists = {}
+    avgRatings = {}
+
+    for (const album of albums) {
+      artists[album.artist] = await fetchArtist(album.artist);
+      avgRatings[album.id] = await fetchAlbumAvgRating(album.id);
+    }
   }
 
   onMount(async () => {
-    albums = await getAllAlbums();
-
-    for (const album of albums) {
-      if (!artists[album.artist]) {
-        artists[album.artist] = await fetchArtist(album.artist);
-      }
-
-      if (!(album.id in avgRatings)) {
-        avgRatings[album.id] = await fetchAlbumAvgRating(album.id);
-      }
-    }
+    await fetchAlbumPage(currentPage);
 
     totalRows = albums.length;
     totalPages = Math.ceil(totalRows / perPage);
@@ -67,19 +66,33 @@
     }
   }
 
-  function handleSearch(event: Event) {
-    searchQuery = (event.target as HTMLInputElement).value;
-    currentPage = 0; // Reset to the first page on search
+  function handleSearch() {
+    if (currentPage != 1){
+      currentPage = 1;
+    } else {
+      searchFlag = true
+    }
+  }
+
+  function handleKeyPress(event: { key: string; }) {
+    if (event.key === 'Enter') {
+      handleSearch();
+    }
   }
 </script>
 
-<!-- Search Bar -->
-<div class="search-bar">
-  <input type="text" placeholder="Search albums or artists..." on:input={handleSearch} />
-</div>
 
+<div class="search-bar">
+  <input 
+    type="text" 
+    placeholder="Search albums or artists..." 
+    bind:value={searchQuery}
+    on:keypress={handleKeyPress} 
+  />
+  <button on:click={handleSearch}>Search</button>
+</div>
 <section>
-  {#each trimmedRows as album}
+  {#each albums as album}
     <div class="album">
       <a href="{`/album/${album.id}`}">
         <img src={album.cover || 'https://via.placeholder.com/150'} alt="album_cover" class="portada hover-image">
@@ -95,11 +108,11 @@
 
 {#if totalRows > perPage}
   <div class='pagination'>
-    <button on:click={() => currentPage -= 1} disabled={currentPage === 0}>
+    <button on:click={() => currentPage -= 1} disabled={currentPage === 1}>
       Previous
     </button>
-    <p>{currentPage + 1} of {totalPages}</p>
-    <button on:click={() => currentPage += 1} disabled={currentPage === totalPages - 1}>
+    <p>{currentPage} of {totalPages}</p>
+    <button on:click={() => currentPage += 1} disabled={currentPage === totalPages}>
       Next
     </button>
   </div>

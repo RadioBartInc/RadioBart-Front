@@ -319,3 +319,23 @@ export async function deleteClientComment(commentId: string, token: string): Pro
     throw error;
   }
 }
+
+export async function fetchAlbumsPage(page: number, limit: number, pattern: string): Promise<any> {
+  try {
+
+    const response = await axios.get(`${BASE_URL}/albums/paginated/a`, 
+    {
+      params: {
+        limit: limit,
+        page: page,
+        searchString: pattern
+      }
+    }
+    );
+    console.log(response.request);
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching album page:', error);
+    throw error;
+  }
+}
