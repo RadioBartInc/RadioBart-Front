@@ -339,3 +339,21 @@ export async function fetchAlbumsPage(page: number, limit: number, pattern: stri
     throw error;
   }
 }
+
+export async function fetchArtistsPage(page: number, limit: number, pattern: string): Promise<any> {
+  try {
+    const response = await axios.get(`${BASE_URL}/artists/paginated/a`, 
+    {
+      params: {
+        limit: limit,
+        page: page,
+        searchString: pattern
+      }
+    }
+    );
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching artist page:', error);
+    throw error;
+  }
+}

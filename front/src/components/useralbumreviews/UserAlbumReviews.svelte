@@ -11,6 +11,8 @@
   export let reviews: Review[] = [];
   let users: Record<string, User | null> = {};
   
+  let user: User | null = null;
+  
   let reviewLikedState: Record<string, boolean> = {};
   let reviewLikeCounts: Record<string, number> = {};
   let isCooldownActive: Record<string, boolean> = {};
@@ -27,7 +29,8 @@
   
   onMount(async () => {
     try {
-      let user = User.fromObject(JSON.parse(localStorage.getItem('user') || ''));
+      const userObject = JSON.parse(localStorage.getItem('user') || '{}');
+      user = userObject ? User.fromObject(userObject) : null;
 
       const album = await getAlbumById(id);
       

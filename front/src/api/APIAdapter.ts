@@ -4,7 +4,8 @@ import { fetchAllArtists, fetchAllReviews, fetchAllAlbums, fetchArtistById, fetc
   fetchArtistaAvgRating, updateReview, addReview, fetchComentarioById, 
   fetchAllComentarios, addComentario, addUser, authUser, fetchUserStats, 
   putReviewLikes, addAlbum, addArtista, deleteClientReview, deleteClientComment, 
-  deleteClientAlbum, deleteClientArtist, fetchAlbumsPage} from "./APIClient";
+  deleteClientAlbum, deleteClientArtist, fetchAlbumsPage,
+  fetchArtistsPage} from "./APIClient";
 import { Album } from "@src/models/AlbumClass";
 import { Artista } from "@src/models/ArtistaClass";
 import { Comentario } from "@src/models/ComentarioClass";
@@ -233,4 +234,9 @@ export async function deleteArtist(artistId: string, token: string): Promise<boo
 export async function getAlbumsPage(page: number, limit: number, pattern: string): Promise<[Album[], number]> {
   let response = await fetchAlbumsPage(page, limit, pattern)
   return [response.albums.map((album: any) => new Album(album._id, album.title, album.artist, new Date(album.fecha), album.genre, album.reviews, album.cover)), response.total];
+}
+
+export async function getArtistsPage(page: number, limit: number, pattern: string): Promise<[Artista[], number]> {
+  let response = await fetchArtistsPage(page, limit, pattern)
+  return [response.artists.map((artist: any) => new Artista(artist._id, artist.name, artist.albums, artist.picture)), response.total];
 }

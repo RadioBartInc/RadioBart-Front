@@ -141,7 +141,7 @@
     <div class="rating-wrapper"><p class="rating {getRatingClass(avg_rating)}">{avg_rating}</p></div>
 
     <div class="form-section">
-    {#if isLoggedIn}
+      {#if isLoggedIn}
       <form on:submit={submitReview}>
         <div class="user_rating">
           <input 

@@ -25,7 +25,8 @@
   async function fetchData() {
     try {
       token = localStorage.getItem("token");
-      currentUser = User.fromObject(JSON.parse(localStorage.getItem('user') || ''));
+      const userObject = JSON.parse(localStorage.getItem('user') || '{}');
+      currentUser = userObject ? User.fromObject(userObject) : null;
 
       review = await getReviewById(id);
 

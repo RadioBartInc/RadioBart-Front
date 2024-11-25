@@ -1,6 +1,6 @@
 <script lang="ts">
   import { onMount } from 'svelte';
-  import { getAllArtists } from '@src/api/APIAdapter'; 
+  import { getArtistsPage } from '@src/api/APIAdapter'; 
   import type { Artista } from '@src/models/ArtistaClass';
   import { User } from '@src/models/UserClass';
 
@@ -8,74 +8,95 @@
 
   let token: string | null = '';
   let user: User | null = null;
-  let currentPage = 0;
-  let trimmedArtists: Artista[] = [];
-  const perPage = 8;
-  let searchQuery = ''; // Variable to store the search query
 
-  // Derived values for pagination
-  $: totalRows = artists.length;
-  $: totalPages = Math.ceil(totalRows / perPage);
+  let perPage = 8;                
+  let currentPage = 1;            
+  let totalRows = 0; 
+  let totalPages = Math.ceil(totalRows / perPage);  
+  let searchQuery = ''; 
+  let searchFlag = false;
 
-  // Get the artists to display on the current page
   $: {
-      const filteredArtists = searchQuery
-          ? artists.filter(artist => artist.name.toLowerCase().includes(searchQuery.toLowerCase()))
-          : artists;
+    const start = currentPage * perPage;
+    const end = currentPage === totalPages - 1 ? totalRows - 1 : start + perPage - 1;
+    const newSearch = searchFlag
+    
+    fetchArtistsPage(currentPage);
+    searchFlag = false;
+  }
 
-      totalRows = filteredArtists.length;
-      totalPages = Math.ceil(totalRows / perPage);
-
-      const start = currentPage * perPage;
-      const end = start + perPage;
-      trimmedArtists = filteredArtists.slice(start, end);
+  async function fetchArtistsPage(page: number) {
+    console.log("Fetching page:", page, "Per page:", perPage, "Query:", searchQuery);
+    const response = await getArtistsPage(page, perPage, searchQuery);
+    
+    artists = response[0];
+    totalRows = response[1];
+    totalPages = Math.ceil(totalRows / perPage);
   }
 
   onMount(async () => {
-      token = localStorage.getItem('token');
-      user = User.fromObject(JSON.parse(localStorage.getItem('user') || ''));
-      artists = await getAllArtists();
+    token = localStorage.getItem('token');
+
+    const userObject = JSON.parse(localStorage.getItem('user') || '{}');
+    user = userObject ? User.fromObject(userObject) : null;
+
+    await fetchArtistsPage(currentPage);
   });
 
   function nextPage() {
-      if (currentPage < totalPages - 1) currentPage += 1;
+    if (currentPage < totalPages) currentPage += 1;
   }
 
   function previousPage() {
-      if (currentPage > 0) currentPage -= 1;
+    if (currentPage > 1) currentPage -= 1;
   }
 
-  function handleSearch(event: Event) {
-      searchQuery = (event.target as HTMLInputElement).value;
-      currentPage = 0; // Reset to the first page on search
+  function handleSearch() {
+    if (currentPage !== 1) {
+      currentPage = 1;
+    } else {
+      searchFlag = true;
+    }
+  }
+
+  function handleKeyPress(event: { key: string }) {
+    if (event.key === 'Enter') {
+      handleSearch();
+    }
   }
 </script>
 
 <!-- Search Bar -->
 <div class="search-bar">
-  <input type="text" placeholder="Search artists by name..." on:input={handleSearch} />
+  <input 
+    type="text" 
+    placeholder="Search artists by name..." 
+    bind:value={searchQuery}
+    on:keypress={handleKeyPress} 
+  />
+  <button on:click={handleSearch}>Search</button>
 </div>
 
 <section>
-  {#each trimmedArtists as artist}
-      <div class="artista">
-          <a href={`/artista/${artist.id}`}>
-              <img src={artist.foto || 'https://via.placeholder.com/150'} alt="artista_foto" class="artista_foto hover-image">
-          </a>
-          <h3 class="artista_nombre">
-              <a href={`/artista/${artist.id}`}>{artist.name}</a>
-          </h3>
-      </div>
+  {#each artists as artist}
+    <div class="artista">
+      <a href={`/artista/${artist.id}`}>
+        <img src={artist.foto || 'https://via.placeholder.com/150'} alt="artista_foto" class="artista_foto hover-image">
+      </a>
+      <h3 class="artista_nombre">
+        <a href={`/artista/${artist.id}`}>{artist.name}</a>
+      </h3>
+    </div>
   {/each}
 </section>
 
 {#if totalRows > perPage}
   <div class='pagination'>
-    <button on:click={previousPage} disabled={currentPage === 0}>
+    <button on:click={previousPage} disabled={currentPage === 1}>
       Previous
     </button>
-    <p>{currentPage + 1} of {totalPages}</p>
-    <button on:click={nextPage} disabled={currentPage === totalPages - 1}>
+    <p>{currentPage} of {totalPages}</p>
+    <button on:click={nextPage} disabled={currentPage === totalPages}>
       Next
     </button>
   </div>
@@ -84,7 +105,6 @@
 {#if user && user.role}
   <a href="/addArtist" class="agregar_wrapper"><button class="admin-button">Agregar Artista</button></a>
 {/if}
-
 
 <style>
   @import './artistas.css';
