@@ -30,6 +30,7 @@
       let user = User.fromObject(JSON.parse(localStorage.getItem('user') || ''));
 
       const album = await getAlbumById(id);
+      
       if (album) {
         reviews = await fetchReviewsByIds(album.reviews);
         for (const review of reviews) {

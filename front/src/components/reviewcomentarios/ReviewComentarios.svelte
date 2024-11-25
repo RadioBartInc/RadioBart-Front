@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { fetchComentariosById, getReviewById, getUserById, postComentario } from '@src/api/APIAdapter';
+	import { deleteComment, fetchComentariosById, getReviewById, getUserById, postComentario } from '@src/api/APIAdapter';
 	import { MAX_COMMENT_LENGTH } from '@src/consts/limits';
 	import { Comentario } from '@src/models/ComentarioClass';
 	import type { Review } from '@src/models/ReviewClass';
@@ -87,6 +87,12 @@
             message = "An error occurred while submitting the review.";
         }
 	}
+
+    async function callDeleteComment(commentId: string) {
+        await deleteComment(commentId, token ?? "");
+        
+        window.location.reload();
+    }
 </script>
 
 <section>
@@ -108,6 +114,9 @@
                 </div>
             </div>
             <p class="texto">{comentario.content}</p>
+            {#if user && user.role}
+                <button on:click={() => callDeleteComment(comentario.id)} class="admin-button bg-red">Borrar Comentario</button>
+            {/if}
         </div>
     {/each}
 </section>
