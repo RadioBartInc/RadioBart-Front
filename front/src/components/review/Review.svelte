@@ -1,6 +1,7 @@
 <script lang="ts">
   import { onMount } from "svelte";
-  import { getReviewById, getUserById, getAlbumById, getArtistById, updateReviewLikes} from "@src/api/APIAdapter";
+  import { goto } from '$app/navigation';
+  import { getReviewById, getUserById, getAlbumById, getArtistById, updateReviewLikes, deleteReview} from "@src/api/APIAdapter";
   import type { Review } from "@src/models/ReviewClass";
   import { User } from "@src/models/UserClass";
   import type { Album } from "@src/models/AlbumClass";
@@ -18,11 +19,13 @@
 
   let likeCount = 0;
   let likedByUser = false;
-
+  let currentUser: User | null;
   let token: string | null = "";
+
   async function fetchData() {
     try {
       token = localStorage.getItem("token");
+      currentUser = User.fromObject(JSON.parse(localStorage.getItem('user') || ''));
 
       review = await getReviewById(id);
 
@@ -59,6 +62,14 @@
       }
     }
   }
+
+  async function callDeleteReview() {
+    if (review) {
+      await deleteReview(review.id ?? "", token ?? "");
+    }
+
+    goto('/');  
+  }
 </script>
 
 <section>
@@ -73,6 +84,9 @@
         <p class="rating {getRatingClass(review.ratingScore)}">{review.ratingScore}</p>
       </div>
       <p class="fecha">{review.fecha.toLocaleDateString('es-ES')}</p>
+      {#if currentUser && currentUser.role}
+        <button on:click={callDeleteReview} class="admin-button bg-red">Borrar Review</button>
+      {/if}
     </div>
 
     <div class="review">

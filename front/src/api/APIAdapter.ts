@@ -3,14 +3,14 @@ import { fetchAllArtists, fetchAllReviews, fetchAllAlbums, fetchArtistById, fetc
   fetchReviewById, fetchAlbumAvgRating, fetchAllUsers, fetchUserById, 
   fetchArtistaAvgRating, updateReview, addReview, fetchComentarioById, 
   fetchAllComentarios, addComentario, addUser, authUser, fetchUserStats, 
-  putReviewLikes,
-  addAlbum,
-  addArtista} from "./APIClient";
+  putReviewLikes, addAlbum, addArtista, deleteClientReview, deleteClientComment, 
+  deleteClientAlbum, deleteClientArtist, fetchAlbumsPage} from "./APIClient";
 import { Album } from "@src/models/AlbumClass";
 import { Artista } from "@src/models/ArtistaClass";
 import { Comentario } from "@src/models/ComentarioClass";
 import { Review } from "@src/models/ReviewClass";
 import { User } from "@src/models/UserClass";
+
 import { UserStats } from "@src/models/UserStats";
 
 export async function getAllArtists(): Promise<Artista[]> {
@@ -81,12 +81,12 @@ export async function fetchAlbumsById(albumIds: string[]): Promise<Album[]> {
 }
 
 export async function postAlbum(album: Album, token: string, admin_secret: string, user_id: string): Promise<boolean | null> {
-  const parsedAlbum = album.toAPIFormat(); // Convert Review instance to API format object
+  const parsedAlbum = album.toAPIFormat();
   return await addAlbum(parsedAlbum, token, admin_secret, user_id);
 }
 
 export async function postArtist(artista: Artista, token: string, admin_secret: string, user_id: string): Promise<boolean | null> {
-  const parsedArtista = artista.toAPIFormat(); // Convert Review instance to API format object
+  const parsedArtista = artista.toAPIFormat();
   return await addArtista(parsedArtista, token, admin_secret, user_id);
 }
 
@@ -120,13 +120,13 @@ export async function getArtistaAvgRating(id: string): Promise<number | null> {
 }
 
 export async function postReview(review: Review, token: string): Promise<boolean | null> {
-  const parsedReview = review.toAPIFormat(); // Convert Review instance to API format object
+  const parsedReview = review.toAPIFormat(); 
   return await addReview(parsedReview, token);
 }
 
 // Function to handle updating an existing review
 export async function putReview(review: Review, token: string): Promise<boolean | null> {
-  const parsedReview = review.toAPIFormat(); // Convert Review instance to API format object
+  const parsedReview = review.toAPIFormat(); 
   return await updateReview(review.id, parsedReview, token);
 }
 
@@ -168,13 +168,13 @@ export async function postComentario(comment: Comentario, token: string): Promis
 
 export async function registerUser(user: User): Promise<boolean | null> {
   
-  const parsedUser = user.toAPIFormat(); // Convert User instance to API format object
+  const parsedUser = user.toAPIFormat(); 
   return await addUser(parsedUser);
 }
 
 export async function loginUser(user: User): Promise<string | null> {
   console.log(user);
-  const parsedUser = user.toAPIFormat(); // Convert User instance to API format object
+  const parsedUser = user.toAPIFormat(); 
   return await authUser(parsedUser);
 }
 
@@ -212,4 +212,25 @@ export async function updateReviewLikes(reviewId: string, token: string, likes: 
   }
   
   return await putReviewLikes(reviewId, token, likeInfo);
+}
+
+export async function deleteReview(reviewId: string, token: string): Promise<boolean | null> {
+  return await deleteClientReview(reviewId, token);
+}
+
+export async function deleteComment(commentId: string, token: string): Promise<boolean | null> {
+  return await deleteClientComment(commentId, token);
+}
+
+export async function deleteAlbum(albumId: string, token: string): Promise<boolean | null> {
+  return await deleteClientAlbum(albumId, token);
+}
+
+export async function deleteArtist(artistId: string, token: string): Promise<boolean | null> {
+  return await deleteClientArtist(artistId, token);
+}
+
+export async function getAlbumsPage(page: number, limit: number, pattern: string): Promise<[Album[], number]> {
+  let response = await fetchAlbumsPage(page, limit, pattern)
+  return [response.albums.map((album: any) => new Album(album._id, album.title, album.artist, new Date(album.fecha), album.genre, album.reviews, album.cover)), response.total];
 }

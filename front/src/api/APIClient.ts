@@ -253,7 +253,89 @@ export async function addArtista(artist: object, token: string, admin_secret: st
     return response.status === 201;
   }
   catch (error) {
-    console.error('Error adding album:', error);
+    console.error('Error adding artist:', error);
+    throw error;
+  }
+}
+
+export async function deleteClientReview(reviewId: string, token: string): Promise<boolean | null> {
+  try {
+    const response = await axios.delete(`${BASE_URL}/reviews/${reviewId}`, {
+      headers: {
+        'Authorization': `Bearer ${token}`
+      },
+      timeout: 10000
+    }
+    );
+    return response.status === 200;
+  }
+  catch (error) {
+    console.error('Error deleting review:', error);
+    throw error;
+  }
+}
+
+export async function deleteClientAlbum(albumId: string, token: string): Promise<boolean | null> {
+  try {
+    const response = await axios.delete(`${BASE_URL}/albums/${albumId}`, {
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    });
+    return response.status === 200;
+  }
+  catch (error) {
+    console.error('Error deleting album:', error);
+    throw error;
+  }
+}
+
+export async function deleteClientArtist(artistId: string, token: string): Promise<boolean | null> {
+  try {
+    const response = await axios.delete(`${BASE_URL}/artists/${artistId}`, {
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    });
+    return response.status === 200;
+  }
+  catch (error) {
+    console.error('Error deleting artist:', error);
+    throw error;
+  }
+}
+
+export async function deleteClientComment(commentId: string, token: string): Promise<boolean | null> {
+  try {
+    const response = await axios.delete(`${BASE_URL}/comments/${commentId}`, {
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    });
+    return response.status === 200;
+  }
+  catch (error) {
+    console.error('Error deleting artist:', error);
+    throw error;
+  }
+}
+
+export async function fetchAlbumsPage(page: number, limit: number, pattern: string): Promise<any> {
+  try {
+
+    const response = await axios.get(`${BASE_URL}/albums/paginated/a`, 
+    {
+      params: {
+        limit: limit,
+        page: page,
+        searchString: pattern
+      }
+    }
+    );
+    console.log(response.request);
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching album page:', error);
     throw error;
   }
 }

@@ -141,3 +141,7 @@ form{
     align-items: center;
     font-size: 2rem;
 }
+
+.admin-button{
+    margin-top: .5rem;
+}

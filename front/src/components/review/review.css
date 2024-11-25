@@ -21,6 +21,7 @@ section{
     max-height: 3rem;
     border-radius: 100vw;
     margin-right: .5rem;
+    object-fit: cover;
 } 
 
 .fecha{
@@ -78,11 +79,19 @@ section{
 
 .artista{
     margin-bottom: .25rem;
+    text-align: center;
 }
 
-.portada, .album{
+.album{
     margin-bottom: .5rem;
     text-align: center;
+    font-size: 1rem;
+}
+
+.portada{
+    aspect-ratio: 1/1;
+    width: 100%;
+    margin-bottom: .5rem;
 }
 
 .more_review {
