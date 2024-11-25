@@ -19,6 +19,7 @@
     const start = currentPage * perPage;
     const end = currentPage === totalPages - 1 ? totalRows - 1 : start + perPage - 1;
     const newSearch = searchFlag
+    
     fetchAlbumPage(currentPage);
     searchFlag = false
   }

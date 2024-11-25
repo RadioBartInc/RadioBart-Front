@@ -8,6 +8,10 @@
       "_internal.js"
     ]
   },
+  "_APIAdapter.js": {
+    "file": "chunks/APIAdapter.js",
+    "name": "APIAdapter"
+  },
   "_Navbar.js": {
     "file": "chunks/Navbar.js",
     "name": "Navbar",
@@ -22,10 +26,18 @@
     "file": "chunks/Review.js",
     "name": "Review",
     "imports": [
-      "_ssr.js"
+      "_ssr.js",
+      "_client.js"
     ],
     "css": [
-      "_app/immutable/assets/Review.JTP8kwl6.css"
+      "_app/immutable/assets/Review.Cc08Ip7Q.css"
+    ]
+  },
+  "_client.js": {
+    "file": "chunks/client.js",
+    "name": "client",
+    "imports": [
+      "_exports.js"
     ]
   },
   "_exports.js": {
@@ -62,7 +74,7 @@
     "isEntry": true,
     "imports": [
       "_ssr.js",
-      "_exports.js"
+      "_client.js"
     ]
   },
   "node_modules/@sveltejs/kit/src/runtime/components/layout.svelte": {
@@ -97,7 +109,7 @@
       "_misc.js"
     ],
     "css": [
-      "_app/immutable/assets/_page.BDmV7G2X.css"
+      "_app/immutable/assets/_page.DWy6lsBf.css"
     ]
   },
   "src/routes/addArtist/+page.svelte": {
@@ -109,7 +121,7 @@
       "_ssr.js"
     ],
     "css": [
-      "_app/immutable/assets/_page.D5LXvmXx.css"
+      "_app/immutable/assets/_page.BvOe8e8S.css"
     ]
   },
   "src/routes/album/[id]/+page.js": {
@@ -129,11 +141,12 @@
     "imports": [
       "_ssr.js",
       "_Navbar.js",
+      "_client.js",
       "_misc.js",
       "_limits.js"
     ],
     "css": [
-      "_app/immutable/assets/_page.DQOQBn8I.css"
+      "_app/immutable/assets/_page.FcOHvFAu.css"
     ]
   },
   "src/routes/albums/+page.svelte": {
@@ -143,11 +156,12 @@
     "isEntry": true,
     "imports": [
       "_ssr.js",
+      "_APIAdapter.js",
       "_misc.js",
       "_Navbar.js"
     ],
     "css": [
-      "_app/immutable/assets/_page.CfBucpTO.css"
+      "_app/immutable/assets/_page.CB9sT_zX.css"
     ]
   },
   "src/routes/artista/[id]/+page.js": {
@@ -166,10 +180,11 @@
     "isEntry": true,
     "imports": [
       "_ssr.js",
-      "_Navbar.js"
+      "_Navbar.js",
+      "_client.js"
     ],
     "css": [
-      "_app/immutable/assets/_page.DPHOZHNG.css"
+      "_app/immutable/assets/_page.zYJ_JhZ7.css"
     ]
   },
   "src/routes/artista/[id]/addAlbum/+page.js": {
@@ -190,7 +205,7 @@
       "_ssr.js"
     ],
     "css": [
-      "_app/immutable/assets/_page.ByFXuhqF.css"
+      "_app/immutable/assets/_page.GMVAKC4J.css"
     ]
   },
   "src/routes/artistas/+page.svelte": {
@@ -200,10 +215,11 @@
     "isEntry": true,
     "imports": [
       "_ssr.js",
+      "_APIAdapter.js",
       "_Navbar.js"
     ],
     "css": [
-      "_app/immutable/assets/_page.b4qQqi9P.css"
+      "_app/immutable/assets/_page.BYCFfLBC.css"
     ]
   },
   "src/routes/login/+page.svelte": {
@@ -215,7 +231,7 @@
       "_ssr.js"
     ],
     "css": [
-      "_app/immutable/assets/_page.BV61EAqy.css"
+      "_app/immutable/assets/_page.EMXXM0mb.css"
     ]
   },
   "src/routes/register/+page.svelte": {
@@ -227,7 +243,7 @@
       "_ssr.js"
     ],
     "css": [
-      "_app/immutable/assets/_page.DmAmWmWz.css"
+      "_app/immutable/assets/_page.B4PMNLcD.css"
     ]
   },
   "src/routes/review/[id]/+page.js": {
@@ -250,7 +266,7 @@
       "_Review.js"
     ],
     "css": [
-      "_app/immutable/assets/_page.BX5u_J_q.css"
+      "_app/immutable/assets/_page.D4B7mNoh.css"
     ]
   },
   "src/routes/reviews/+page.svelte": {
@@ -288,7 +304,7 @@
       "_misc.js"
     ],
     "css": [
-      "_app/immutable/assets/_page.CawAoG6t.css"
+      "_app/immutable/assets/_page.DO5hSxB5.css"
     ]
   }
 }
