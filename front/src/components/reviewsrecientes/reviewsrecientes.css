@@ -40,7 +40,6 @@ section{
 .album{
     font-size: 1.2rem;
     margin: .3rem 0;
-
 }
 
 .fecha{
@@ -65,6 +64,7 @@ section{
     padding: .3rem 0;
     margin: .3rem 0;
     width: 4rem;
+    height: 2rem;
 }
 
 .usuario{
@@ -83,3 +83,58 @@ section{
     border-radius: 100vw;
     margin-right: .5rem
 } 
+
+.avatar_wrapper{
+    display: flex;
+    align-items: center;
+}
+
+.heart {
+    transition: fill 0.3s ease;
+}
+
+.likes{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.likes_button{
+    max-width: 2rem;
+    max-height: 2rem;
+    margin-right: .5rem;
+    margin-left: 1rem;
+    border: 0;
+    background: none;
+    cursor: pointer;
+}
+.likes-no{
+    text-align: center;
+}
+
+.more_review {
+    margin-left: 1rem;
+} 
+
+.more_review button{
+    background: none;
+    cursor: pointer;
+    border: 0
+}
+
+.more_review button img{
+    max-width: 2rem;
+    max-height: 2rem;
+    height: 100%;
+}
+
+.buttons{
+    display: flex;
+    flex-direction: row;
+}
+
+.likes_wrapper{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}

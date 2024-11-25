@@ -80,3 +80,7 @@ form{
     box-shadow: 0 0 4px var(--form-review-field-bg);
     background-color: var(--form-review-field-bg);
 }
+
+.admin-button{
+    margin-top: .5rem
+}

@@ -58,7 +58,6 @@
         {/each}
     {/if}
 </section>
-
 <style>
     @import './artistaalbums.css';
 </style>

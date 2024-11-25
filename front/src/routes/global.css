@@ -108,3 +108,60 @@
 :global(.green){
     color: var(--good-rating-bg);
 }
+
+/* Global Admin Button Styles */
+:global(.admin-button) {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;          /* Comfortable padding (12px vertical, 24px horizontal) */
+    font-size: 1rem;                  /* Base font size (16px) */
+    font-weight: bold;                /* Make the text stand out */
+    text-align: center;               /* Center-align text */
+    text-transform: uppercase;        /* Capitalize letters for emphasis */
+    color: #ffffff;                   /* White text color */
+    background-color: #4CAF50;        /* Primary admin color (green) */
+    border: none;                     /* Remove default border */
+    border-radius: 0.5rem;            /* Rounded corners (8px) */
+    cursor: pointer;                  /* Pointer cursor on hover */
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+/* Hover and Active States */
+:global(.admin-button:hover) {
+    background-color: #45a049;        /* Darker shade for hover */
+    transform: translateY(-0.125rem);  /* Slight raise effect on hover */
+}
+
+:global(.admin-button:active) {
+    background-color: #3e8e41;        /* Even darker on active click */
+    transform: translateY(0.0625rem);  /* Slight press effect */
+}
+
+/* Focus State for Accessibility */
+:global(.admin-button:focus) {
+    outline: 0.2rem solid rgba(72, 180, 97, 0.5); /* Green focus outline (3px) */
+}
+
+/* Disabled State */
+:global(.admin-button:disabled) {
+    background-color: #cccccc;        /* Gray color for disabled state */
+    color: #666666;                   /* Darker text color */
+    cursor: not-allowed;              /* Not-allowed cursor */
+    transform: none;                  /* Remove hover effect */
+}
+
+/* Responsive Adjustments */
+@media (max-width: 37.5rem) {   /* 600px in rem units */
+    :global(.admin-button) {
+        width: 100%;                  /* Full width on small screens */
+        padding: 0.75rem;             /* Adjust padding */
+        font-size: 0.875rem;          /* Slightly smaller text (14px) */
+    }
+}
+
+:global(.bg-red){
+    background-color: var(--bad-rating-bg);
+}
+
+:global(.bg-red:hover){
+    background-color: red
+}
