@@ -20,7 +20,7 @@
             token = localStorage.getItem('token');
       
             if (token) {
-                const userObject = JSON.parse(localStorage.getItem('user') || '');
+                const userObject = JSON.parse(localStorage.getItem('user') || '{}');
                 user = userObject ? User.fromObject(userObject) : null;
                 if (user) {
                     userId = user.id;
@@ -96,13 +96,17 @@
 </script>
 
 <section>
+    {#if token}
     <form on:submit|preventDefault={submitComment}>
         {#if message}
-          <p class="submission-message" style="color: {messageColor}">{message}</p>
+        <p class="submission-message" style="color: {messageColor}">{message}</p>
         {/if}
 		<textarea bind:value={newComment} placeholder="Write a comment..." rows="3" class="comment-input"></textarea>
 		<button type="submit" class="submit-btn">Submit Comment</button>
 	</form>
+    {:else}
+    <p class="comment-input not-logged">Logeate para escribir un mensaje</p>
+    {/if}
     {#each comentarios as comentario}
         <div class="comentario">
             <div class="usuario">

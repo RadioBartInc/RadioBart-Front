@@ -31,9 +31,6 @@
         <li>
             <a href="/reviews"><button>Reviews</button></a>
         </li>
-        <li>
-            <a href="/users"><button>Usuarios</button></a>
-        </li>
         {#if token && user}
             <li>
                 <a href="/usuario/{user.id}"><button class="perfil">
